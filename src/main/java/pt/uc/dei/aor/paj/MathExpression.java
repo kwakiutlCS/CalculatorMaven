@@ -94,14 +94,16 @@ public class MathExpression implements Serializable {
 		expression = limitExpressionSize(formExpression(entries));
 	}
 	
+	@Override
 	public boolean equals(Object other) {
 		if (other instanceof MathExpression) {
 			MathExpression o = (MathExpression) other;
-			return o.entries.equals(entries);
+			return formExpression(o.entries).equals(formExpression(entries));
 		}
 		return false;
 	}
 	
+	@Override
 	public int hashCode() {
 		return entries.hashCode();
 	}
