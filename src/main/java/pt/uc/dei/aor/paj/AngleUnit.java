@@ -1,15 +1,22 @@
 package pt.uc.dei.aor.paj;
 
 import java.io.Serializable;
+
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
+@Named
+@SessionScoped
 public class AngleUnit implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int id;
 	private String unit;
 	
-		
+	public AngleUnit() {
+		id = 2;
+		unit = "Graus";
+	}
+	
 	public AngleUnit(int id, String unit) {
 		this.id = id;
 		this.unit = unit;

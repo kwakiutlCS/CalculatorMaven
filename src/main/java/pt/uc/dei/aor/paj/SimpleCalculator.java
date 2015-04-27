@@ -12,16 +12,18 @@ public class SimpleCalculator {
 	private MathExpression expression;
 	@Inject
 	private History history;
+	@Inject
 	private AngleUnit angleUnit;
 	
 	public SimpleCalculator() {
-		angleUnit = new AngleUnit(1, "Radianos");
+	
 	}
 
 	
 	public void pressKey(ActionEvent event) {
 		String id = event.getComponent().getId().substring(3);
 		System.out.println(id);
+		System.out.println(angleUnit.getUnit());
 		switch(id) {
 		case "Clear": expression.clear(); break;
 		case "Back": expression.remove(); break;
