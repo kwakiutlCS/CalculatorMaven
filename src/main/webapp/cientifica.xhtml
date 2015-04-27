@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+      
+      
+    <h:head>
+         <h:outputStylesheet library="css" name="style.css"/> 
+        
+        <title>Calculator</title>
+    </h:head>
+    <h:body >
+    	<div id="fundo">
+    	<div>
+    		<h:link outcome="index.xhtml" value="normal" />
+    		
+    	</div>
+    	
+		<h:form>
+			<div id="visor">
+				<h:outputText id="expression" value="#{simpleCalculator.expression}" />
+			</div>
+
+			
+			<div id="botao">
+				<div>
+					<h:selectOneRadio value="#{simpleCalculator.angleUnit}">
+						<f:selectItems value="#{listaUnidades.unidades}" var="item"
+	                    itemLabel="#{item.unit}" itemValue="#{item.unit}" />
+   					</h:selectOneRadio>
+				</div>
+				
+				<h:panelGrid columns="5" styleClass="cientifico">
+					<h:commandButton value="sin" id="keySin" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig"/>
+					<h:commandButton value="cos" id="keyCos" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig"/>
+					<h:commandButton value="tan" id="keyTan" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig"/>
+					<h:commandButton value="log" id="keyLog" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig"/>
+					<h:commandButton value="sinh" id="keySinh" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig"/>
+					<h:commandButton value="cosh" id="keyCosh" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig"/>
+					<h:commandButton value="tanh" id="keyTanh" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig"/>
+					<h:commandButton value="ln" id="keyLn" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig"/>
+					<h:commandButton value="sqrt" id="keySqrt" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig"/>
+					<h:commandButton value="(" id="keyParE" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig"/>
+					<h:commandButton value=")" id="keyParD" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig"/>
+					<h:commandButton value="&#x3c0;" id="keyPi" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig"/>
+					<h:commandButton value="10^x" id="keyNotCien" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig"/>
+					<h:commandButton value="x^2" id="keyQuad" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig"/>
+					<h:commandButton value="x^y" id="keyExp" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig"/>
+					<h:commandButton value="raiz qq" id="keyRaiz" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig"/>
+					<h:commandButton value="n!" id="keyFact" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig"/>
+					<h:commandButton value="e" id="keyNep" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig"/>
+					<h:commandButton value="Inv" id="keyInv" action="cientificaInv.xhtml?faces-redirect=true" styleClass="input_trig"/>
+					
+					
+				</h:panelGrid>
+				
+				<h:panelGrid columns="5" styleClass="cientifico">
+					<h:commandButton value="7" id="key7"
+						actionListener="#{simpleCalculator.pressKey}" styleClass="num"/>
+					<h:commandButton value="8" id="key8"
+						actionListener="#{simpleCalculator.pressKey}" styleClass="num"/>
+					<h:commandButton value="9" id="key9"
+						actionListener="#{simpleCalculator.pressKey}" styleClass="num"/>
+					<h:commandButton value="&#xf7;" id="keyDiv"
+						actionListener="#{simpleCalculator.pressKey}" styleClass="input_oper"/>
+					<h:commandButton value="AC" id="keyClear"
+						actionListener="#{simpleCalculator.pressKey}" styleClass="input_oper"/>
+					<h:commandButton value="4" id="key4"
+						actionListener="#{simpleCalculator.pressKey}" styleClass="num"/>
+					<h:commandButton value="5" id="key5"
+						actionListener="#{simpleCalculator.pressKey}" styleClass="num" />
+					<h:commandButton value="6" id="key6"
+						actionListener="#{simpleCalculator.pressKey}" styleClass="num"/>
+					<h:commandButton value="&#xd7;" id="keyMult"
+						actionListener="#{simpleCalculator.pressKey}" styleClass="input_oper"/>
+					<h:commandButton value="&#x232b;" id="keyBack"
+						 actionListener="#{simpleCalculator.pressKey}" styleClass="input_oper"/>
+					<h:commandButton value="1" id="key1"
+						actionListener="#{simpleCalculator.pressKey}" styleClass="num"/>
+					<h:commandButton value="2" id="key2"
+						actionListener="#{simpleCalculator.pressKey}" styleClass="num"/>
+					<h:commandButton value="3" id="key3"
+						actionListener="#{simpleCalculator.pressKey}" styleClass="num" />
+					<h:commandButton value="+" id="keyAdd"
+						actionListener="#{simpleCalculator.pressKey}" styleClass="input_oper"/>
+					<h:commandButton value="+/-" id="keySim"
+						actionListener="#{simpleCalculator.pressKey}" styleClass="input_oper"/>
+					<h:commandButton value="." id="keyDot"
+						actionListener="#{simpleCalculator.pressKey}" styleClass="input_oper"/>
+					<h:commandButton value="0" id="key0"
+						actionListener="#{simpleCalculator.pressKey}" styleClass="num"/>
+					<h:commandButton value="=" id="keyEqualsCientifico"
+						actionListener="#{simpleCalculator.pressKey}" styleClass="input_oper"/>
+					<h:commandButton value="-" id="keyMinus"
+						actionListener="#{simpleCalculator.pressKey}" styleClass="input_oper"/>
+					
+					
+
+				</h:panelGrid>
+				
+			</div>
+			<div class="historico">
+			<p:scrollPanel style="width:250px;height:300px">
+				<ui:repeat var="item" value="#{calculator.historicoCientifica}"
+					varStatus="status">
+					<p class="#{status.even==true? 'par' : 'impar'}"><h:commandLink value="#{item}" action="#{calculator.reutilizar(item)}" /></p>
+				</ui:repeat>
+			</p:scrollPanel>
+			</div>
+		</h:form>
+	</div>
+        
+    </h:body>
+</html>
