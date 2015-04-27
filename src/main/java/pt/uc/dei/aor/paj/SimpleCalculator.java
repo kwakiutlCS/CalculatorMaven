@@ -1,21 +1,21 @@
 package pt.uc.dei.aor.paj;
 
-import java.io.Serializable;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.event.ActionEvent;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 @Named
-@SessionScoped
-public class SimpleCalculator implements Serializable {
-	private static final long serialVersionUID = 1L;
+@RequestScoped
+public class SimpleCalculator {
+	@Inject
 	private MathExpression expression;
-	private String angleUnit;
+	@Inject
+	private History history;
+	private AngleUnit angleUnit;
 	
 	public SimpleCalculator() {
-		System.out.println("calculator");
-		expression = new MathExpression();
-		angleUnit = "Radianos";
+		angleUnit = new AngleUnit(1, "Radianos");
 	}
 
 	
@@ -25,8 +25,11 @@ public class SimpleCalculator implements Serializable {
 		switch(id) {
 		case "Clear": expression.clear(); break;
 		case "Back": expression.remove(); break;
-		case "EqualsSimples": expression.evaluate(); break;
-		case "EqualsCientifico": expression.evaluateScientific(angleUnit); break;
+		case "EqualsSimples": 
+			history.addExpression(expression.getClone());
+			expression.evaluate(); 
+			break;
+		case "EqualsCientifico": expression.evaluateScientific(angleUnit.getUnit()); break;
 		default: expression.add(id); break;
 		}
 		
@@ -44,13 +47,23 @@ public class SimpleCalculator implements Serializable {
 	}
 
 
-	public String getAngleUnit() {
+	public AngleUnit getAngleUnit() {
 		return angleUnit;
 	}
 
 
-	public void setAngleUnit(String angleUnit) {
+	public void setAngleUnit(AngleUnit angleUnit) {
 		this.angleUnit = angleUnit;
+	}
+
+
+	public History getHistory() {
+		return history;
+	}
+
+
+	public void setHistory(History history) {
+		this.history = history;
 	}
 	
 }

@@ -71,7 +71,7 @@
 			</div>
 			<div class="historico">
 			<p:scrollPanel style="width:250px;height:300px">
-				<ui:repeat var="item" value="#{calculator.historicoSimples}"
+				<ui:repeat var="item" value="#{history.expressions}"
 					varStatus="status">
 					<p class="#{status.even==true? 'par' : 'impar'}"><h:commandLink value="#{item}" action="#{calculator.reutilizar(item)}" /></p>
 				</ui:repeat>

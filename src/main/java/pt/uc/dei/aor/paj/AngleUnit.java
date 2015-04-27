@@ -1,7 +1,11 @@
 package pt.uc.dei.aor.paj;
 
+import java.io.Serializable;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
 
-public class AngleUnit  {
+public class AngleUnit implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private String unit;
 	

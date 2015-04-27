@@ -1,12 +1,20 @@
 package pt.uc.dei.aor.paj;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
+
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 
-public class MathExpression {
+@Named
+@SessionScoped
+public class MathExpression implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private List<String> numbers;
 	private List<String> binaryOperators;
 	private List<String> unuaryOperators;
@@ -19,10 +27,9 @@ public class MathExpression {
 	private int reset;
 	
 	public MathExpression() {
-		System.out.println("here");
+		windowSize = 20;
 		clear();
 		reset = 0;
-		windowSize = 20;
 		
 		numbers = Arrays.asList(new String[]{"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"});
 		binaryOperators = Arrays.asList(new String[]{"Div", "Add", "Minus", "Mult", "Exp", "NotCien", "Raiz"});
@@ -62,7 +69,7 @@ public class MathExpression {
 			addSymbols(s);
 		}
 		
-		expression = limitExpression(formExpression(entries));
+		expression = limitExpressionSize(formExpression(entries));
 	}
 	
 	
@@ -84,20 +91,41 @@ public class MathExpression {
 	public void remove() {
 		entries.remove(entries.size()-1);
 		if (entries.size() == 0) entries.add("0");
-		expression = limitExpression(formExpression(entries));
+		expression = limitExpressionSize(formExpression(entries));
 	}
 	
+	public boolean equals(Object other) {
+		if (other instanceof MathExpression) {
+			MathExpression o = (MathExpression) other;
+			return o.entries.equals(entries);
+		}
+		return false;
+	}
+	
+	public int hashCode() {
+		return entries.hashCode();
+	}
+	
+	public MathExpression getClone() {
+		MathExpression exp = new MathExpression();
+		for (String e : entries) {
+			exp.entries.add(e);
+		}
+		exp.reset = reset;
+		exp.expression = expression;
+		
+		return exp;
+	}
 	
 	// helper functions
 	private String formExpression(List<String> e) {
 		String exp = "";
 		for (String s : e) exp += s;
-		
 		return exp;
 	}
 	
 	
-	private String limitExpression(String exp) {
+	private String limitExpressionSize(String exp) {
 		if (exp.length() > windowSize) return exp.substring(exp.length()-windowSize);
 		return exp;
 	}
@@ -188,11 +216,7 @@ public class MathExpression {
 	private void clear(String s) {
 		entries = new LinkedList<>();
 		entries.add(s);
-		System.out.println(entries);
-		System.out.println(expression);
-		expression = limitExpression(formExpression(entries));
-		System.out.println(entries);
-		System.out.println(expression);
+		expression = limitExpressionSize(formExpression(entries));
 	}
 	
 	private String getLastNumber() {
