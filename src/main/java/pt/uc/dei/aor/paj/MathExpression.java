@@ -94,6 +94,15 @@ public class MathExpression implements Serializable {
 		expression = limitExpressionSize(formExpression(entries));
 	}
 	
+	public void set(MathExpression exp) {
+		entries = new LinkedList<>();
+		for (String s : exp.entries) {
+			entries.add(s);
+		}
+		expression = limitExpressionSize(formExpression(entries));
+		reset = exp.reset;
+	}
+	
 	@Override
 	public boolean equals(Object other) {
 		if (other instanceof MathExpression) {
@@ -110,6 +119,7 @@ public class MathExpression implements Serializable {
 	
 	public MathExpression getClone() {
 		MathExpression exp = new MathExpression();
+		exp.entries = new LinkedList<>();
 		for (String e : entries) {
 			exp.entries.add(e);
 		}
@@ -283,16 +293,16 @@ public class MathExpression implements Serializable {
 				reset = 1;
 			}
 			catch(ArithmeticException e1) {
-				clear("Divis�o por zero!");
+				clear("Divisão por zero!");
 				reset = 2;
 			}
 			catch(Exception e1) {
-				clear("Express�o inv�lida");
+				clear("Expressão inv�lida");
 				reset = 2;
 			}
 		}
 		catch (Exception e2) {
-			clear("Express�o inv�lida");
+			clear("Expressão inválida");
 			reset = 2;
 		}	
 	}

@@ -73,7 +73,7 @@
 			<p:scrollPanel style="width:250px;height:300px">
 				<ui:repeat var="item" value="#{history.expressions}"
 					varStatus="status">
-					<p class="#{status.even==true? 'par' : 'impar'}"><h:commandLink value="#{item}" action="#{calculator.reutilizar(item)}" /></p>
+					<p class="#{status.even==true? 'par' : 'impar'}"><h:commandLink value="#{item}" actionListener="#{simpleCalculator.reuseExpression(item)}" /></p>
 				</ui:repeat>
 			</p:scrollPanel>
 		</div>

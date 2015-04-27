@@ -36,6 +36,9 @@ public class SimpleCalculator {
 	}
 	
 	
+	public void reuseExpression(MathExpression exp) {
+		expression.set(exp);
+	}
 	
 	// getters and setters
 	public MathExpression getExpression() {
