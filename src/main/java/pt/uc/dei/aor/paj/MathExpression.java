@@ -23,6 +23,11 @@ public class MathExpression implements Serializable {
 	private List<String> otherSymbols;
 	private String expression;
 	private List<String> entries;
+	public List<String> getEntries() {
+		return entries;
+	}
+
+
 	private int windowSize;
 	private int reset;
 	

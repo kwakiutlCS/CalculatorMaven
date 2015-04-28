@@ -14,6 +14,8 @@ public class SimpleCalculator {
 	private History history;
 	@Inject
 	private AngleUnitList angleUnitList;
+	@Inject
+	private Statistics stats;
 	
 	public SimpleCalculator() {
 		
@@ -24,13 +26,17 @@ public class SimpleCalculator {
 		String id = event.getComponent().getId().substring(3);
 		System.out.println("key");
 		System.out.println(id);
-		
 		switch(id) {
 		case "Clear": expression.clear(); break;
 		case "Back": expression.remove(); break;
 		case "EqualsSimples": 
 			history.addExpression(expression.getClone(), 1);
+			for (String s : expression.getEntries()) {
+				stats.add(s);
+			}
 			expression.evaluate(); 
+			
+			System.out.println(stats.getCounter().get("+"));
 			break;
 		case "EqualsCientifico": 
 			history.addExpression(expression.getClone(), 2);
