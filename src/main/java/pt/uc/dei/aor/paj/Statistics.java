@@ -29,8 +29,22 @@ public class Statistics {
 	}
 
 
+	public int getSymbolCount(String s) {
+		return counter.get(s);
+	}
+	
 	public Map<String, Integer> getCounter() {
 		return counter;
+	}
+
+
+	public List<String> getSymbols() {
+		return symbols;
+	}
+
+
+	public void setSymbols(List<String> symbols) {
+		this.symbols = symbols;
 	}
 
 

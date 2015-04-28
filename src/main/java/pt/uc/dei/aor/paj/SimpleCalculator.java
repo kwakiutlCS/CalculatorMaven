@@ -35,11 +35,12 @@ public class SimpleCalculator {
 				stats.add(s);
 			}
 			expression.evaluate(); 
-			
-			System.out.println(stats.getCounter().get("+"));
 			break;
 		case "EqualsCientifico": 
 			history.addExpression(expression.getClone(), 2);
+			for (String s : expression.getEntries()) {
+				stats.add(s);
+			}
 			expression.evaluateScientific(angleUnitList.getChosenUnit()); break;
 		default: expression.add(id); break;
 		}
