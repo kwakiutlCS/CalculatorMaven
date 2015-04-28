@@ -27,7 +27,7 @@ public class MathExpression implements Serializable {
 	private int reset;
 	
 	public MathExpression() {
-		windowSize = 20;
+		windowSize = 37;
 		clear();
 		reset = 0;
 		
@@ -78,8 +78,8 @@ public class MathExpression implements Serializable {
 		evaluate(formExpression(entries));
 	}
 	
-	public void evaluateScientific(String angleUnit) {
-		String exp = convert(angleUnit);
+	public void evaluateScientific(AngleUnit angleUnit) {
+		String exp = convert(angleUnit.getUnit());
 		evaluate(exp);
 	}
 

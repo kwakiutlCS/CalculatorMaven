@@ -27,12 +27,13 @@
 
 			
 			<div id="botao">
-				<div>
-					<h:selectOneRadio value="#{simpleCalculator.angleUnit}">
+				<!-- <div>
+					<h:selectOneRadio value="#{angleUnitList.chosenUnit}">
 						<f:selectItems value="#{angleUnitList.units}" var="item"
-	                    itemLabel="#{item.unit}" itemValue="#{item}" />
+	                    itemLabel="#{item}" itemValue="#{item}" />
    					</h:selectOneRadio>
-				</div>
+				</div> -->
+				
 				
 				<h:panelGrid columns="5" styleClass="cientifico">
 					<h:commandButton value="sin" id="keySin" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig"/>
@@ -105,9 +106,9 @@
 			</div>
 			<div class="historico">
 			<p:scrollPanel style="width:250px;height:300px">
-				<ui:repeat var="item" value="#{history.expressions}"
+				<ui:repeat var="item" value="#{history.scientificEntries}"
 					varStatus="status">
-					<p class="#{status.even==true? 'par' : 'impar'}"><h:commandLink value="#{item}" actionListener="#{simpleCalculator.reuseExpression(item)}" /></p>
+					<p class="#{status.even==true? 'par' : 'impar'}"><h:commandLink value="#{item}" actionListener="#{simpleCalculator.reuseExpression(item.getExpression())}" /></p>
 				</ui:repeat>
 			</p:scrollPanel>
 			</div>

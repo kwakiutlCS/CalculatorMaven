@@ -13,25 +13,28 @@ public class SimpleCalculator {
 	@Inject
 	private History history;
 	@Inject
-	private AngleUnit angleUnit;
+	private AngleUnitList angleUnitList;
 	
 	public SimpleCalculator() {
-	
+		
 	}
 
 	
 	public void pressKey(ActionEvent event) {
 		String id = event.getComponent().getId().substring(3);
+		System.out.println("key");
 		System.out.println(id);
-		System.out.println(angleUnit.getUnit());
+		
 		switch(id) {
 		case "Clear": expression.clear(); break;
 		case "Back": expression.remove(); break;
 		case "EqualsSimples": 
-			history.addExpression(expression.getClone());
+			history.addExpression(expression.getClone(), 1);
 			expression.evaluate(); 
 			break;
-		case "EqualsCientifico": expression.evaluateScientific(angleUnit.getUnit()); break;
+		case "EqualsCientifico": 
+			history.addExpression(expression.getClone(), 2);
+			expression.evaluateScientific(angleUnitList.getChosenUnit()); break;
 		default: expression.add(id); break;
 		}
 		
@@ -52,16 +55,6 @@ public class SimpleCalculator {
 	}
 
 
-	public AngleUnit getAngleUnit() {
-		return angleUnit;
-	}
-
-
-	public void setAngleUnit(AngleUnit angleUnit) {
-		this.angleUnit = angleUnit;
-	}
-
-
 	public History getHistory() {
 		return history;
 	}
@@ -70,5 +63,8 @@ public class SimpleCalculator {
 	public void setHistory(History history) {
 		this.history = history;
 	}
+
+
+
 	
 }

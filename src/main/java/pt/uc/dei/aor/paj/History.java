@@ -11,24 +11,45 @@ import javax.inject.Named;
 @SessionScoped
 public class History implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private List<MathExpression> expressions;
+	private List<HistoryEntry> simpleEntries;
+	private List<HistoryEntry> scientificEntries;
 	
 	public History() {
-		expressions = new LinkedList<>();
+		simpleEntries = new LinkedList<>();
+		scientificEntries = new LinkedList<>();
+		
 	}
 	
-	public void addExpression(MathExpression exp) {
-		expressions.remove(exp);
-		expressions.add(0, exp);
-	}
-	
-	public List<MathExpression> getExpressions() {
-		return expressions;
+	public void addExpression(MathExpression exp, int type) {
+		HistoryEntry he = new HistoryEntry(exp);
+		
+		if (type == 1) {
+			//entries.remove(exp);
+			simpleEntries.add(he);
+		}
+		else {
+			scientificEntries.add(he);
+		}
 	}
 
-	public void setExpressions(List<MathExpression> expressions) {
-		this.expressions = expressions;
+	public List<HistoryEntry> getSimpleEntries() {
+		return simpleEntries;
 	}
+
+	public void setSimpleEntries(List<HistoryEntry> simpleEntries) {
+		this.simpleEntries = simpleEntries;
+	}
+
+	public List<HistoryEntry> getScientificEntries() {
+		return scientificEntries;
+	}
+
+	public void setScientificEntries(List<HistoryEntry> scientificEntries) {
+		this.scientificEntries = scientificEntries;
+	}
+
+	
+	
 	
 	
 }

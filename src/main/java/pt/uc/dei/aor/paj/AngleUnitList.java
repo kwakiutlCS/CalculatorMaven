@@ -4,22 +4,22 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 @Named
-@RequestScoped
+@SessionScoped
 public class AngleUnitList implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private List<AngleUnit> units;
-	private int numUnits;
+	private AngleUnit chosenUnit;
 	
 	public AngleUnitList() {
-		numUnits = 1;
 		units = new ArrayList<>();
-		units.add(new AngleUnit(numUnits++, "Radianos"));
-		units.add(new AngleUnit(numUnits++, "Graus"));
+		units.add(new AngleUnit("Radianos", 1));
+		units.add(new AngleUnit("Graus", 180/Math.PI));
+		chosenUnit = units.get(0);
 	}
 
 	public List<AngleUnit> getUnits() {
@@ -29,5 +29,15 @@ public class AngleUnitList implements Serializable{
 	public void setUnits(List<AngleUnit> units) {
 		this.units = units;
 	}
+
+	public AngleUnit getChosenUnit() {
+		return chosenUnit;
+	}
+
+	public void setChosenUnit(AngleUnit chosenUnit) {
+		this.chosenUnit = chosenUnit;
+	}
+
+	
 	
 }

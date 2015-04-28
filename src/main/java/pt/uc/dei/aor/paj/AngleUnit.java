@@ -9,27 +9,15 @@ import javax.inject.Named;
 @SessionScoped
 public class AngleUnit implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private int id;
 	private String unit;
+	private double conversionFactor;
 	
-	public AngleUnit() {
-		id = 2;
-		unit = "Graus";
-	}
-	
-	public AngleUnit(int id, String unit) {
-		this.id = id;
+	public AngleUnit(String unit, double conversionFactor) {
+		this.setConversionFactor(conversionFactor);
 		this.unit = unit;
 	}
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
+	
 	public String getUnit() {
 		return unit;
 	}
@@ -42,18 +30,16 @@ public class AngleUnit implements Serializable {
 	public String toString() {
 		return unit;
 	}
-	
-	@Override
-	public boolean equals(Object other) {
-		if (other instanceof AngleUnit) {
-			AngleUnit o = (AngleUnit) other;
-			return id == o.id;
-		}
-		return false;
+
+
+	public double getConversionFactor() {
+		return conversionFactor;
+	}
+
+
+	public void setConversionFactor(double conversionFactor) {
+		this.conversionFactor = conversionFactor;
 	}
 	
-	@Override
-	public int hashCode() {
-		return id;
-	}
+	
 }
