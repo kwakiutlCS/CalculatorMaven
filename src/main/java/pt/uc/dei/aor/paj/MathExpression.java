@@ -310,7 +310,8 @@ public class MathExpression implements Serializable {
 		Expression e;
 	
 		try {
-			e = new ExpressionBuilder(exp).operator(factorial).build();
+			e = new ExpressionBuilder(exp).operator(factorial)
+					.variables("\u03C0", "e").build().setVariable("e", Math.E).setVariable("\u03C0", Math.PI);
 			try {
 				String result = format(String.valueOf(e.evaluate()));
 				clear(result);

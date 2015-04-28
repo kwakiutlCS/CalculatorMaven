@@ -15,7 +15,7 @@ public class Statistics {
 	private List<String> symbols;
 	
 	public Statistics() {
-		symbols = Arrays.asList(new String[]{"+", "-", "*", "/"});
+		symbols = Arrays.asList(new String[]{"+", "-", "*", "/", "%", });
 		counter = new HashMap<>();
 		for (String s : symbols) {
 			counter.put(s, 0);
