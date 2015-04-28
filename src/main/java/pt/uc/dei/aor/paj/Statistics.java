@@ -13,8 +13,12 @@ import javax.inject.Named;
 public class Statistics {
 	private Map<String, Integer> counter;
 	private List<String> symbols;
+	private List<String> descriptions;
 	
 	public Statistics() {
+		descriptions = Arrays.asList(new String[]{"Adição", "Subtracção", "Multiplicação", "Divisão", "Percentagem", "Seno",
+				"Coseno", "Tangente", "Logaritmo base 10", "Logaritmo natural", "Seno hiperbólico",
+				"Tangente hiperbólico", "Coseno hiperbólico", "Raiz quadrada", "Expoente", "Factorial"});
 		symbols = Arrays.asList(new String[]{"+", "-", "*", "/", "%", "sin(", "cos(", "tan(", "log(", "ln(", "sinh(",
 				"tanh(", "cosh(", "sqrt(", "^", "!"});
 		counter = new HashMap<>();
@@ -31,7 +35,7 @@ public class Statistics {
 
 
 	public int getSymbolCount(String s) {
-		return counter.get(s);
+		return counter.get(symbols.get(descriptions.indexOf(s)));
 	}
 	
 	public Map<String, Integer> getCounter() {
@@ -51,6 +55,16 @@ public class Statistics {
 
 	public void setCounter(Map<String, Integer> counter) {
 		this.counter = counter;
+	}
+
+
+	public List<String> getDescriptions() {
+		return descriptions;
+	}
+
+
+	public void setDescriptions(List<String> descriptions) {
+		this.descriptions = descriptions;
 	}
 	
 	

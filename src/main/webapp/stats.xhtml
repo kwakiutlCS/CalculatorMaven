@@ -19,7 +19,7 @@
     
 	<p:scrollPanel styleClass="painel1">
     
-	<ui:repeat var="item" value="#{statistics.symbols}" varStatus="status">
+	<ui:repeat var="item" value="#{statistics.descriptions}" varStatus="status">
 		<p class="#{status.even==true? 'par' : 'impar'}">#{item} -
 			#{statistics.getSymbolCount(item)}</p>
 			

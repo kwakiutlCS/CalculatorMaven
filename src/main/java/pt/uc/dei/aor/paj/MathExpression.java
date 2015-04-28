@@ -107,9 +107,14 @@ public class MathExpression implements Serializable {
 		if (index == -1) {
 			entries = new LinkedList<>();
 		}
-		
+		else {
+			entries.add("(");
+		}
 		for (String s : exp.entries) {
 			entries.add(s);
+		}
+		if (index != -1) {
+			entries.add(")");
 		}
 		expression = limitExpressionSize(formExpression(entries));
 		reset = exp.reset;
