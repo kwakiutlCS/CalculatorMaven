@@ -12,6 +12,11 @@ public class AngleUnit implements Serializable {
 	private String unit;
 	private double conversionFactor;
 	
+	public AngleUnit() {
+		unit = "Radianos";
+		conversionFactor = 1;
+	}
+	
 	public AngleUnit(String unit, double conversionFactor) {
 		this.setConversionFactor(conversionFactor);
 		this.unit = unit;

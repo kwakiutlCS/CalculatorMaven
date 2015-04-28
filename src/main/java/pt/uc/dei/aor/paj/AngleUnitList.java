@@ -12,31 +12,33 @@ import javax.inject.Named;
 public class AngleUnitList implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	private List<AngleUnit> units;
-	private AngleUnit chosenUnit;
+	private List<String> units;
+	private String chosenUnit;
 	
 	public AngleUnitList() {
 		units = new ArrayList<>();
-		units.add(new AngleUnit("Radianos", 1));
-		units.add(new AngleUnit("Graus", 180/Math.PI));
-		chosenUnit = units.get(0);
+		units.add("Radianos");
+		units.add("Graus");
+		chosenUnit = "Radianos";
 	}
 
-	public List<AngleUnit> getUnits() {
+	public List<String> getUnits() {
 		return units;
 	}
 
-	public void setUnits(List<AngleUnit> units) {
+	public void setUnits(List<String> units) {
 		this.units = units;
 	}
 
-	public AngleUnit getChosenUnit() {
+	public String getChosenUnit() {
 		return chosenUnit;
 	}
 
-	public void setChosenUnit(AngleUnit chosenUnit) {
+	public void setChosenUnit(String chosenUnit) {
 		this.chosenUnit = chosenUnit;
 	}
+
+	
 
 	
 	

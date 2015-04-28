@@ -15,7 +15,10 @@ public class SimpleCalculator {
 	@Inject
 	private AngleUnitList angleUnitList;
 	@Inject
+	private AngleUnit angleUnit;
+	@Inject
 	private Statistics stats;
+	
 	
 	public SimpleCalculator() {
 		
@@ -69,6 +72,16 @@ public class SimpleCalculator {
 
 	public void setHistory(History history) {
 		this.history = history;
+	}
+
+
+	public AngleUnit getAngleUnit() {
+		return angleUnit;
+	}
+
+
+	public void setAngleUnit(AngleUnit angleUnit) {
+		this.angleUnit = angleUnit;
 	}
 
 

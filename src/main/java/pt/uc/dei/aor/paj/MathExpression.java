@@ -10,6 +10,7 @@ import javax.inject.Named;
 
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
+import net.objecthunter.exp4j.operator.Operator;
 
 @Named
 @SessionScoped
@@ -83,8 +84,8 @@ public class MathExpression implements Serializable {
 		evaluate(formExpression(entries));
 	}
 	
-	public void evaluateScientific(AngleUnit angleUnit) {
-		String exp = convert(angleUnit.getUnit());
+	public void evaluateScientific(String angleUnit) {
+		String exp = convert(angleUnit);
 		evaluate(exp);
 	}
 
@@ -285,13 +286,31 @@ public class MathExpression implements Serializable {
 		return formExpression(entries);
 	}
 	
+	private Operator factorial = new Operator("!", 1, true, Operator.PRECEDENCE_POWER + 1) {
+
+	    @Override
+	    public double apply(double... args) {
+	        final int arg = (int) args[0];
+	        if (arg != args[0]) {
+	            throw new IllegalArgumentException("Operand for factorial has to be an integer");
+	        }
+	        if (arg < 0) {
+	            throw new IllegalArgumentException("The operand of the factorial can not be less than zero");
+	        }
+	        double result = 1;
+	        for (int i = 1; i <= arg; i++) {
+	            result *= i;
+	        }
+	        return result;
+	    }
+	};
 	
 	private void evaluate(String exp) {
 		if (reset > 0) return;
 		Expression e;
 	
 		try {
-			e = new ExpressionBuilder(exp).build();
+			e = new ExpressionBuilder(exp).operator(factorial).build();
 			try {
 				String result = format(String.valueOf(e.evaluate()));
 				clear(result);
