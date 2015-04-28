@@ -15,10 +15,8 @@
     </h:head>
     <h:body >
     	<div id="fundo">
-    	<div>
-    		<h:link outcome="index.xhtml" value="normal" />
-    		
-    	</div>
+    	 <ui:composition template="comum.xhtml">
+    	<ui:define name="conteudo">
     	
 		<h:form>
 			<div id="visor">
@@ -113,6 +111,8 @@
 			</p:scrollPanel>
 			</div>
 		</h:form>
+		</ui:define>
+		</ui:composition>
 	</div>
         
     </h:body>
