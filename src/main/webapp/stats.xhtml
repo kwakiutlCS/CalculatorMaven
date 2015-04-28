@@ -12,10 +12,23 @@
 	<title>Calculator</title>
 </h:head>
 <h:body>
+<div id="fundo">
+    	 <ui:composition template="comum.xhtml">
+    	<ui:define name="conteudo">
+    	
+    
+	<p:scrollPanel styleClass="painel1">
+    
 	<ui:repeat var="item" value="#{statistics.symbols}" varStatus="status">
 		<p class="#{status.even==true? 'par' : 'impar'}">#{item} -
 			#{statistics.getSymbolCount(item)}</p>
+			
 	</ui:repeat>
+	</p:scrollPanel>
 
+
+</ui:define>
+		</ui:composition>
+		</div>
 </h:body>
 </html>

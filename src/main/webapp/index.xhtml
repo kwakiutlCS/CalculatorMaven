@@ -14,12 +14,11 @@
     </h:head>
     <h:body>
     	<div id="fundo">
-    	<div>
-    		<h:link outcome="cientifica.xhtml" value="cientifica" />
-    	</div>
+    	 <ui:composition template="comum.xhtml">
+    	<ui:define name="conteudo">
     	
 		<h:form>
-			<div id="visor" >
+			<div id="visor1" >
 				<h:outputText id="expression" value="#{simpleCalculator.expression}"/>
 			</div>
 
@@ -35,7 +34,7 @@
 					<h:commandButton value="&#xf7;" id="keyDiv"
 						actionListener="#{simpleCalculator.pressKey}" styleClass="input_oper"/>
 					<h:commandButton value="AC" id="keyClear"
-						actionListener="#{simpleCalculator.pressKey}" styleClass="input_oper"/>
+						actionListener="#{simpleCalculator.pressKey}" styleClass="input_clear"/>
 					<h:commandButton value="4" id="key4"
 						actionListener="#{simpleCalculator.pressKey}" styleClass="num"/>
 					<h:commandButton value="5" id="key5"
@@ -45,7 +44,7 @@
 					<h:commandButton value="&#xd7;" id="keyMult"
 						actionListener="#{simpleCalculator.pressKey}" styleClass="input_oper"/>
 					<h:commandButton value="&#x232b;" id="keyBack"
-						 actionListener="#{simpleCalculator.pressKey}" styleClass="input_oper"/>
+						 actionListener="#{simpleCalculator.pressKey}" styleClass="input_clear"/>
 					<h:commandButton value="1" id="key1"
 						actionListener="#{simpleCalculator.pressKey}" styleClass="num"/>
 					<h:commandButton value="2" id="key2"
@@ -70,7 +69,7 @@
 				</h:panelGrid>
 			</div>
 			<div class="historico">
-			<p:scrollPanel style="width:250px;height:300px">
+			<p:scrollPanel styleClass="painel">
 				<ui:repeat var="item" value="#{history.simpleEntries}"
 					varStatus="status">
 					<p class="#{status.even==true? 'par' : 'impar'}"><h:commandLink value="#{item}" actionListener="#{simpleCalculator.reuseExpression(item.getExpression())}" /></p>
@@ -78,6 +77,8 @@
 			</p:scrollPanel>
 		</div>
 		</h:form>
+		</ui:define>
+		</ui:composition>
 		
 	</div>
         
