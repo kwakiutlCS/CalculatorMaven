@@ -101,7 +101,13 @@ public class MathExpression implements Serializable {
 	}
 	
 	public void set(MathExpression exp) {
-		entries = new LinkedList<>();
+		List<String> opSymbols = Arrays.asList(new String[]{"/", "+", "-", "*", "^", "E", "^(1/("});
+		String lastEntry = entries.get(entries.size()-1);
+		int index = opSymbols.indexOf(lastEntry);
+		if (index == -1) {
+			entries = new LinkedList<>();
+		}
+		
 		for (String s : exp.entries) {
 			entries.add(s);
 		}
