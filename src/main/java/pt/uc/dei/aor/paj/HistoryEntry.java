@@ -24,4 +24,13 @@ public class HistoryEntry {
 	public String toString() {
 		return expression.toString();
 	}
+	
+	@Override
+	public boolean equals(Object other) {
+		if (other instanceof HistoryEntry) {
+			HistoryEntry o = (HistoryEntry) other;
+			return expression.equals(o.expression);
+		}
+		return false;
+	}
 }

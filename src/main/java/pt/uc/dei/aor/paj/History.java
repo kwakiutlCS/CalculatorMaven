@@ -24,11 +24,12 @@ public class History implements Serializable {
 		HistoryEntry he = new HistoryEntry(exp);
 		
 		if (type == 1) {
-			//entries.remove(exp);
-			simpleEntries.add(he);
+			simpleEntries.remove(he);
+			simpleEntries.add(0, he);
 		}
 		else {
-			scientificEntries.add(he);
+			scientificEntries.remove(he);
+			scientificEntries.add(0, he);
 		}
 	}
 
