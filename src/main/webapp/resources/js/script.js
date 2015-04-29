@@ -37,6 +37,11 @@ var detectBtnClick = function() {
 		return false;
 	});
 	
+	$(".symBtn").click(function(e) {
+		addSymOperator();
+		return false;
+	})
+	
 }
 
 
@@ -119,6 +124,23 @@ var addUnOperator = function(n) {
 	else if (ignore.indexOf(lastLetter) === -1) {
 		screen.val(text+output);
 	}
+}
+
+
+// applies symmetric operation
+var addSymOperator = function() {
+	cleanLastNumber();
+	var lastNumber = getLastNumber();
+	if (lastNumber === "0" || lastNumber === "") return;
+	
+	var screen = $("#simpleKeyBoard\\:expression");
+	var text = screen.val();
+	
+	var x = text.length-lastNumber.length;
+	text = text.substring(0, x);
+	text += "(-"+lastNumber+")";
+	
+	screen.val(text);
 }
 
 
