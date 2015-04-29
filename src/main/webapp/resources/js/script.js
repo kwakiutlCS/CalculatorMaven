@@ -25,6 +25,11 @@ var detectBtnClick = function() {
 		return false;
 	});
 	
+	$(".clearBtn").click(function(e) {
+		var n = e.currentTarget.value;
+		clear(n);
+		return false;
+	});
 	
 }
 
@@ -84,6 +89,44 @@ var addBinOperator = function(n) {
 	else if (ignore.indexOf(lastLetter) === -1) {
 		screen.val(text+output);
 	}
+}
+
+//adds a unuary operator if possible
+var addUnOperator = function(n) {
+	var ignore = ["("];
+	var inputs = ["%"];
+	var replace = ["%"];
+	var output = replace[inputs.indexOf(n)];
+	var screen = $("#simpleKeyBoard\\:expression");
+	var text = screen.val();
+	var lastLetter = text.charAt(text.length-1);
+	$("#simpleKeyBoard\\:phase").val("0");
+	
+	if (replace.indexOf(lastLetter) != -1) {
+		screen.val(text.substring(0, text.length-1)+output);
+	}
+	else if (ignore.indexOf(lastLetter) === -1) {
+		screen.val(text+output);
+	}
+}
+
+
+// deletes screen
+var clear = function(n) {
+	var screen = $("#simpleKeyBoard\\:expression");
+	var phase = $("#simpleKeyBoard\\:phase");
+	var sc;
+	
+	if (n === "AC" || phase.val() === "1") {
+		screen.val("0");
+	}
+	else {
+		sc = screen.val();
+		if (sc.length === 1) screen.val("0");
+		else screen.val(sc.substring(0, sc.length-1));
+	}
+	
+	phase.val("0");
 }
 
 

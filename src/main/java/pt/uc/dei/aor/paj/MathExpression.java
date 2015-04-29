@@ -18,6 +18,7 @@ public class MathExpression implements Serializable {
 	
 	public MathExpression() {
 		reset = 0;
+		expression = "0";
 	}
 
 	
