@@ -30,30 +30,23 @@ public class SimpleCalculator {
 		System.out.println("key");
 		System.out.println(id);
 		switch(id) {
-		case "Clear": expression.clear(); break;
-		case "Back": expression.remove(); break;
 		case "EqualsSimples": 
 			history.addExpression(expression.getClone(), 1);
-			for (String s : expression.getEntries()) {
-				stats.add(s);
-			}
+			
 			expression.evaluate(); 
 			break;
 		case "EqualsCientifico": 
 			history.addExpression(expression.getClone(), 2);
-			for (String s : expression.getEntries()) {
-				stats.add(s);
-			}
+			
 			expression.evaluateScientific(angleUnitList.getChosenUnit()); break;
-		default: expression.add(id); break;
 		}
 		
 	}
 	
 	
-	public void reuseExpression(MathExpression exp) {
-		expression.set(exp);
-	}
+//	public void reuseExpression(MathExpression exp) {
+//		expression.set(exp);
+//	}
 	
 	// getters and setters
 	public MathExpression getExpression() {
@@ -82,6 +75,16 @@ public class SimpleCalculator {
 
 	public void setAngleUnit(AngleUnit angleUnit) {
 		this.angleUnit = angleUnit;
+	}
+
+
+	public Statistics getStats() {
+		return stats;
+	}
+
+
+	public void setStats(Statistics stats) {
+		this.stats = stats;
 	}
 
 

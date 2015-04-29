@@ -7,19 +7,18 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
       
-    <h:head>
-        <h:outputStylesheet library="css" name="style.css"/> 
-        
-        <title>Calculator</title>
-    </h:head>
     <h:body>
-    	<div id="fundo">
-    	 <ui:composition template="comum.xhtml">
-    	<ui:define name="conteudo">
+     	<ui:composition template="comum.xhtml">
+     	<ui:define name="extraHead">
+     		 <h:outputScript library="js" name="script.js" />
+     	</ui:define>
+     	
+     	<ui:define name="conteudo">
     	
-		<h:form>
+		<h:form id="simpleKeyBoard">
 			<div id="visor1" >
-				<h:outputText id="expression" value="#{simpleCalculator.expression}"/>
+				<p:inputText id="expression" value="#{mathExpression.expression}"/>
+				<h:inputHidden value="#{mathExpression.reset}" name="phase" />
 			</div>
 
 			
@@ -32,7 +31,7 @@
 					<h:commandButton value="9" id="key9"
 						actionListener="#{simpleCalculator.pressKey}" styleClass="num"/>
 					<h:commandButton value="&#xf7;" id="keyDiv"
-						actionListener="#{simpleCalculator.pressKey}" styleClass="input_oper"/>
+						actionListener="#{simpleCalculator.pressKey}" styleClass="binOpBtn"/>
 					<h:commandButton value="AC" id="keyClear"
 						actionListener="#{simpleCalculator.pressKey}" styleClass="input_clear"/>
 					<h:commandButton value="4" id="key4"
@@ -42,7 +41,7 @@
 					<h:commandButton value="6" id="key6"
 						actionListener="#{simpleCalculator.pressKey}"  styleClass="num" />
 					<h:commandButton value="&#xd7;" id="keyMult"
-						actionListener="#{simpleCalculator.pressKey}" styleClass="input_oper"/>
+						actionListener="#{simpleCalculator.pressKey}" styleClass="binOpBtn"/>
 					<h:commandButton value="&#x232b;" id="keyBack"
 						 actionListener="#{simpleCalculator.pressKey}" styleClass="input_clear"/>
 					<h:commandButton value="1" id="key1"
@@ -52,17 +51,17 @@
 					<h:commandButton value="3" id="key3"
 						actionListener="#{simpleCalculator.pressKey}" styleClass="num"/>
 					<h:commandButton value="+" id="keyAdd"
-						actionListener="#{simpleCalculator.pressKey}" styleClass="input_oper"/>
+						actionListener="#{simpleCalculator.pressKey}" styleClass="binOpBtn"/>
 					<h:commandButton value="&#xb1;" id="keySim"
 						actionListener="#{simpleCalculator.pressKey}" styleClass="input_oper"/>
 					<h:commandButton value="." id="keyDot"
-						actionListener="#{simpleCalculator.pressKey}" styleClass="input_oper"/>
+						actionListener="#{simpleCalculator.pressKey}" styleClass="dotBtn"/>
 					<h:commandButton value="0" id="key0"
 						actionListener="#{simpleCalculator.pressKey}" styleClass="num" />
 					<h:commandButton value="=" id="keyEqualsSimples"
 						actionListener="#{simpleCalculator.pressKey}" styleClass="input_oper"/>
 					<h:commandButton value="-" id="keyMinus"
-						actionListener="#{simpleCalculator.pressKey}" styleClass="input_oper"/>
+						actionListener="#{simpleCalculator.pressKey}" styleClass="binOpBtn"/>
 					<h:commandButton value="%" id="keyPerc"
 						actionListener="#{simpleCalculator.pressKey}" styleClass="input_oper"/>
 					
@@ -80,7 +79,7 @@
 		</ui:define>
 		</ui:composition>
 		
-	</div>
+	
         
     </h:body>
 </html>

@@ -82,7 +82,7 @@ table.cientifico {
     padding: 10%;
 }
 
-.input_oper {
+.input_oper, .dotBtn, .binOpBtn {
    display:inline-box;
    width: 80px;
    height: 60px;
