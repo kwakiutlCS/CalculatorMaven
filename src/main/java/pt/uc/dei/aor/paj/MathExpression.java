@@ -1,6 +1,8 @@
 package pt.uc.dei.aor.paj;
 
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
@@ -28,8 +30,8 @@ public class MathExpression implements Serializable {
 	}
 	
 
-	public void evaluate() {
-		evaluate(expression);
+	public boolean evaluate() {
+		return evaluate(expression);
 	}
 	
 	public String getExpression() {
@@ -62,7 +64,7 @@ public class MathExpression implements Serializable {
 		return expression.hashCode();
 	}
 	
-	// TODO
+	// TODO -  can be simplified
 	public MathExpression getClone() {
 		MathExpression exp = new MathExpression();
 		
@@ -72,8 +74,17 @@ public class MathExpression implements Serializable {
 		return exp;
 	}
 	
-	// helper functions
 	
+	public void set(MathExpression exp) {
+		List<String> ops = Arrays.asList(new String[]{"*", "+", "/", "-", "^"});
+		if (ops.contains(expression.substring(expression.length()-1))) {
+			this.expression += "("+exp.expression+")";
+		}
+		else this.expression = exp.expression;
+		reset = 0;
+	}
+	
+	// helper functions
 	private String format(String s) {
 		if (s.charAt(0) == '.') s = "0"+s;
 		int index = s.indexOf('.');
@@ -133,8 +144,8 @@ public class MathExpression implements Serializable {
 	    }
 	};
 	
-	private void evaluate(String exp) {
-		if (reset > 0) return;
+	private boolean evaluate(String exp) {
+		if (reset > 0) return false;
 		Expression e;
 		try {
 			e = new ExpressionBuilder(exp).operator(factorial)
@@ -142,6 +153,7 @@ public class MathExpression implements Serializable {
 			try {
 				expression = format(String.valueOf(e.evaluate()));
 				reset = 1;
+				return true;
 			}
 			catch(ArithmeticException e1) {
 				expression = "Erro";
@@ -156,9 +168,11 @@ public class MathExpression implements Serializable {
 			expression = "Expressão inválida";
 			reset = 2;
 		}	
+		return false;
 	}
 
 
+	
 	public int getReset() {
 		return reset;
 	}

@@ -27,26 +27,29 @@ public class SimpleCalculator {
 	
 	public void pressKey(ActionEvent event) {
 		String id = event.getComponent().getId().substring(3);
-		System.out.println("key");
-		System.out.println(id);
+		
+		MathExpression clone;
 		switch(id) {
 		case "EqualsSimples": 
-			history.addExpression(expression.getClone(), 1);
-			
-			expression.evaluate(); 
+			clone = expression.getClone();
+			if (expression.evaluate()) {
+				history.addExpression(clone, 1);
+			}
 			break;
 		case "EqualsCientifico": 
-			history.addExpression(expression.getClone(), 2);
-			
-			expression.evaluateScientific(angleUnitList.getChosenUnit()); break;
+			clone = expression.getClone();
+			if (expression.evaluate()) {
+				history.addExpression(clone, 2);
+			}
+			break;
 		}
 		
 	}
 	
 	
-//	public void reuseExpression(MathExpression exp) {
-//		expression.set(exp);
-//	}
+	public void reuseExpression(MathExpression exp) {
+		expression.set(exp);
+	}
 	
 	// getters and setters
 	public MathExpression getExpression() {

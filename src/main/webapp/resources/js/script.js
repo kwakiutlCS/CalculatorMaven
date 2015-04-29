@@ -50,7 +50,7 @@ var addNumber = function(n) {
 	var screen = $("#simpleKeyBoard\\:expression");
 	var phase = $("#simpleKeyBoard\\:phase");
 	
-	if (phase.val() === "1") {
+	if (phase.val() === "1" || phase.val() === "2") {
 		screen.val("");
 	}
 	var text = screen.val();
@@ -71,7 +71,7 @@ var addNumber = function(n) {
 var addDot = function() {
 	var screen = $("#simpleKeyBoard\\:expression");
 	var phase = $("#simpleKeyBoard\\:phase");
-	if (phase.val() === "1") {
+	if (phase.val() === "1" || phase.val() === "2") {
 		screen.val("");
 	}
 	
@@ -89,6 +89,10 @@ var addDot = function() {
 // adds a binary operator if possible
 var addBinOperator = function(n) {
 	cleanLastNumber();
+	var phase = $("#simpleKeyBoard\\:phase");
+	if (phase.val() === "2") {
+		return;
+	}
 	var ignore = ["("];
 	var inputs = ["\u00D7", "-", "+", "\u00F7"];
 	var replace = ["*", "-", "+", "/"];
@@ -108,6 +112,10 @@ var addBinOperator = function(n) {
 
 //adds a unuary operator if possible
 var addUnOperator = function(n) {
+	var phase = $("#simpleKeyBoard\\:phase");
+	if (phase.val() === "1" || phase.val() === "2") {
+		return;
+	}
 	cleanLastNumber();
 	var ignore = ["(", ")"];
 	var inputs = ["%"];
@@ -130,6 +138,10 @@ var addUnOperator = function(n) {
 // applies symmetric operation
 var addSymOperator = function() {
 	cleanLastNumber();
+	var phase = $("#simpleKeyBoard\\:phase");
+	if (phase.val() === "1" || phase.val() === "2") {
+		return;
+	}
 	var lastNumber = getLastNumber();
 	if (lastNumber === "0" || lastNumber === "") return;
 	
@@ -150,7 +162,7 @@ var clear = function(n) {
 	var phase = $("#simpleKeyBoard\\:phase");
 	var sc;
 	
-	if (n === "AC" || phase.val() === "1") {
+	if (n === "AC" || phase.val() === "1" || phase.val() === "2") {
 		screen.val("0");
 	}
 	else {
@@ -211,7 +223,6 @@ var isUnuary = function(n) {
 // pressing enter
 var keyBoardSubmit = function() {
 	$(document).keydown(function(e) {
-		alert(getLastNumber());
 		var key = e.which;
 		if (key === 13) {
 			$("#simpleKeyBoard\\:keyEqualsSimples").click();
