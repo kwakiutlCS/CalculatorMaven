@@ -53,6 +53,9 @@ var addNumber = function(n) {
 	if (getLastNumber() === "0") {
 		screen.val(text.substring(0, text.length-1)+n); 
 	}
+	else if (isUnuary(getLastChar())) {
+		screen.val(text+"*"+n);
+	}
 	else {
 		screen.val(text+n); 
 	}
@@ -80,6 +83,7 @@ var addDot = function() {
 
 // adds a binary operator if possible
 var addBinOperator = function(n) {
+	cleanLastNumber();
 	var ignore = ["("];
 	var inputs = ["\u00D7", "-", "+", "\u00F7"];
 	var replace = ["*", "-", "+", "/"];
@@ -99,6 +103,7 @@ var addBinOperator = function(n) {
 
 //adds a unuary operator if possible
 var addUnOperator = function(n) {
+	cleanLastNumber();
 	var ignore = ["(", ")"];
 	var inputs = ["%"];
 	var replace = ["%"];
@@ -143,7 +148,11 @@ var getLastNumber = function() {
 	
 	var index = screen.length-1;
 	var char = screen.charAt(index);
-	while ((char >= "0" && char <= "9") || char === ".") {
+	var par = 0;
+	
+	while ((char >= "0" && char <= "9") || char === "." || char === ')' || par > 0) {
+		if (char === ')') par++;
+		else if (char === '(') par--;
 		lastNumber = char+lastNumber;
 		char = screen.charAt(--index);
 	}
@@ -151,9 +160,36 @@ var getLastNumber = function() {
 	return lastNumber;
 }
 
+// returns last char
+var getLastChar = function() {
+	var screen = $("#simpleKeyBoard\\:expression").val();
+	if (screen.length > 0) return screen.charAt(screen.length-1);
+	return '';
+}
+
+
+// removes last dot
+var cleanLastNumber = function() {
+	var screen = $("#simpleKeyBoard\\:expression");
+	var text = screen.val();
+	if (text.charAt(text.length-1) === '.') {
+		screen.val(text.substring(0, text.length-1));
+	}
+}
+
+
+// 
+var isUnuary = function(n) {
+	var symbols = ["%", "!"];
+	return (symbols.indexOf(n) != -1);
+}
+
+
+
 // pressing enter
 var keyBoardSubmit = function() {
 	$(document).keydown(function(e) {
+		alert(getLastNumber());
 		var key = e.which;
 		if (key === 13) {
 			$("#simpleKeyBoard\\:keyEqualsSimples").click();

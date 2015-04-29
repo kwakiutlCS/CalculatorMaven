@@ -17,14 +17,14 @@
     	
 		<h:form id="simpleKeyBoard">
 			<div id="visor1" >
-				<p:inputText id="expression" value="#{mathExpression.expression}"/>
+				<p:inputText id="expression" value="#{mathExpression.expression}" maxlength="33" size="40" />
 				<h:inputHidden value="#{mathExpression.reset}" id="phase" />
 			</div>
 
 			
 			<div id="botao1">
 				<h:panelGrid columns="5" styleClass="input">
-					<h:commandButton value="7" id="key7"
+					<h:button value="7" id="key7"
 						actionListener="#{simpleCalculator.pressKey}" styleClass="num" />
 					<h:commandButton value="8" id="key8"
 						actionListener="#{simpleCalculator.pressKey}" styleClass="num"/>
