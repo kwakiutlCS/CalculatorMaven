@@ -1,6 +1,6 @@
 $(function() {
 	detectBtnClick();
-	
+	keyBoardSubmit();
 });
 
 
@@ -22,6 +22,12 @@ var detectBtnClick = function() {
 	$(".binOpBtn").click(function(e) {
 		var n = e.currentTarget.value;
 		addBinOperator(n);
+		return false;
+	});
+	
+	$(".unOpBtn").click(function(e) {
+		var n = e.currentTarget.value;
+		addUnOperator(n);
 		return false;
 	});
 	
@@ -93,7 +99,7 @@ var addBinOperator = function(n) {
 
 //adds a unuary operator if possible
 var addUnOperator = function(n) {
-	var ignore = ["("];
+	var ignore = ["(", ")"];
 	var inputs = ["%"];
 	var replace = ["%"];
 	var output = replace[inputs.indexOf(n)];
@@ -145,30 +151,13 @@ var getLastNumber = function() {
 	return lastNumber;
 }
 
-
-
-
-//deals with keyboard strokes
-//var detectPressedKeys = function() {
-//	$(document).keydown(function(e) {
-//		var key = e.which;
-//		var mapping = {
-//				13: "EqualsSimples",
-//				106: "Mult",
-//				107: "Add",
-//				109: "Minus",
-//				110: "Dot",
-//				111: "Div",
-//		};
-//		
-//		if (key >= 48 && key <= 57) {
-//			$("#simpleKeyBoard\\:key"+(key-48)).click();
-//		}
-//		else if (key >= 96 && key <= 105) {
-//			$("#simpleKeyBoard\\:key"+(key-96)).click();
-//		}
-//		else if (key in mapping) {
-//			$("#simpleKeyBoard\\:key"+mapping[key]).click();
-//		}
-//	});
-//}
+// pressing enter
+var keyBoardSubmit = function() {
+	$(document).keydown(function(e) {
+		var key = e.which;
+		if (key === 13) {
+			$("#simpleKeyBoard\\:keyEqualsSimples").click();
+			return false;
+		}
+	});
+}

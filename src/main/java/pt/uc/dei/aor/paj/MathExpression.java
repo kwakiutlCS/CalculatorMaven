@@ -144,13 +144,16 @@ public class MathExpression implements Serializable {
 				reset = 1;
 			}
 			catch(ArithmeticException e1) {
+				expression = "Erro";
 				reset = 2;
 			}
 			catch(Exception e1) {
+				expression = "Expressão inválida";
 				reset = 2;
 			}
 		}
 		catch (Exception e2) {
+			expression = "Expressão inválida";
 			reset = 2;
 		}	
 	}
