@@ -44,9 +44,9 @@ public class MathExpression implements Serializable {
 	}
 
 
-	public void evaluateScientific(String angleUnit) {
+	public boolean evaluateScientific(String angleUnit) {
 		String exp = convert(angleUnit);
-		evaluate(exp);
+		return evaluate(exp);
 	}
 
 	

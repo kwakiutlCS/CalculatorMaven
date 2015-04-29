@@ -8,19 +8,18 @@
       xmlns:p="http://primefaces.org/ui">
       
       
-    <h:head>
-         <h:outputStylesheet library="css" name="style.css"/> 
-        
-        <title>Calculator</title>
-    </h:head>
     <h:body >
-    	<div id="fundo">
     	 <ui:composition template="comum.xhtml">
+    	 <ui:define name="extraHead">
+     		 <h:outputScript library="js" name="script.js" />
+     	</ui:define>
+     	
     	<ui:define name="conteudo">
     	
-		<h:form>
-			<div id="visor">
-				<h:outputText id="expression" value="#{simpleCalculator.expression}" />
+		<h:form id="simpleKeyBoard">
+			<div id="visor" >
+				<p:inputText id="expression" value="#{mathExpression.expression}" maxlength="33" size="40" />
+				<h:inputHidden value="#{mathExpression.reset}" id="phase" />
 			</div>
 
 			
@@ -31,7 +30,6 @@
 	                    itemLabel="#{item}" itemValue="#{item}" />
    					</h:selectOneRadio>
 				</div>
-				
 				
 				<h:panelGrid columns="5" styleClass="cientifico">
 					<h:commandButton value="sin" id="keySin" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig"/>
@@ -57,48 +55,49 @@
 					
 				</h:panelGrid>
 				
-				<h:panelGrid columns="5" styleClass="cientifico">
-					<h:commandButton value="7" id="key7"
-						actionListener="#{simpleCalculator.pressKey}" styleClass="num"/>
+				
+				<h:panelGrid columns="5" styleClass="input">
+					<h:button value="7" id="key7"
+						actionListener="#{simpleCalculator.pressKey}" styleClass="num" />
 					<h:commandButton value="8" id="key8"
 						actionListener="#{simpleCalculator.pressKey}" styleClass="num"/>
 					<h:commandButton value="9" id="key9"
 						actionListener="#{simpleCalculator.pressKey}" styleClass="num"/>
 					<h:commandButton value="&#xf7;" id="keyDiv"
-						actionListener="#{simpleCalculator.pressKey}" styleClass="input_oper"/>
+						actionListener="#{simpleCalculator.pressKey}" styleClass="binOpBtn"/>
 					<h:commandButton value="AC" id="keyClear"
-						actionListener="#{simpleCalculator.pressKey}" styleClass="input_clear"/>
+						actionListener="#{simpleCalculator.pressKey}" styleClass="clearBtn"/>
 					<h:commandButton value="4" id="key4"
 						actionListener="#{simpleCalculator.pressKey}" styleClass="num"/>
 					<h:commandButton value="5" id="key5"
-						actionListener="#{simpleCalculator.pressKey}" styleClass="num" />
-					<h:commandButton value="6" id="key6"
 						actionListener="#{simpleCalculator.pressKey}" styleClass="num"/>
+					<h:commandButton value="6" id="key6"
+						actionListener="#{simpleCalculator.pressKey}"  styleClass="num" />
 					<h:commandButton value="&#xd7;" id="keyMult"
-						actionListener="#{simpleCalculator.pressKey}" styleClass="input_oper"/>
-					<h:commandButton value="&#x232b;" id="keyBack"
-						 actionListener="#{simpleCalculator.pressKey}" styleClass="input_clear"/>
+						actionListener="#{simpleCalculator.pressKey}" styleClass="binOpBtn"/>
+					<h:commandButton value="CE" id="keyBack"
+						 actionListener="#{simpleCalculator.pressKey}" styleClass="clearBtn"/>
 					<h:commandButton value="1" id="key1"
 						actionListener="#{simpleCalculator.pressKey}" styleClass="num"/>
 					<h:commandButton value="2" id="key2"
 						actionListener="#{simpleCalculator.pressKey}" styleClass="num"/>
 					<h:commandButton value="3" id="key3"
-						actionListener="#{simpleCalculator.pressKey}" styleClass="num" />
-					<h:commandButton value="+" id="keyAdd"
-						actionListener="#{simpleCalculator.pressKey}" styleClass="input_oper"/>
-					<h:commandButton value="+/-" id="keySim"
-						actionListener="#{simpleCalculator.pressKey}" styleClass="input_oper"/>
-					<h:commandButton value="." id="keyDot"
-						actionListener="#{simpleCalculator.pressKey}" styleClass="input_oper"/>
-					<h:commandButton value="0" id="key0"
 						actionListener="#{simpleCalculator.pressKey}" styleClass="num"/>
-					<h:commandButton value="=" id="keyEqualsCientifico"
+					<h:commandButton value="+" id="keyAdd"
+						actionListener="#{simpleCalculator.pressKey}" styleClass="binOpBtn"/>
+					<h:commandButton value="&#xb1;" id="keySim"
+						actionListener="#{simpleCalculator.pressKey}" styleClass="symBtn"/>
+					<h:commandButton value="." id="keyDot"
+						actionListener="#{simpleCalculator.pressKey}" styleClass="dotBtn"/>
+					<h:commandButton value="0" id="key0"
+						actionListener="#{simpleCalculator.pressKey}" styleClass="num" />
+					<h:commandButton value="=" type="submit" id="keyEqualsCientifico"
 						actionListener="#{simpleCalculator.pressKey}" styleClass="input_oper"/>
 					<h:commandButton value="-" id="keyMinus"
-						actionListener="#{simpleCalculator.pressKey}" styleClass="input_oper"/>
+						actionListener="#{simpleCalculator.pressKey}" styleClass="binOpBtn"/>
+					<h:commandButton value="%" id="keyPerc"
+						actionListener="#{simpleCalculator.pressKey}" styleClass="unOpBtn"/>
 					
-					
-
 				</h:panelGrid>
 				
 			</div>
@@ -113,8 +112,7 @@
 		</h:form>
 		</ui:define>
 		</ui:composition>
-	</div>
-        
+	    
     </h:body>
 
 </html>

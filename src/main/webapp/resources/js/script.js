@@ -1,6 +1,7 @@
 $(function() {
 	detectBtnClick();
 	keyBoardSubmit();
+	$(".invCientific").hide();
 });
 
 
@@ -112,6 +113,8 @@ var addBinOperator = function(n) {
 
 //adds a unuary operator if possible
 var addUnOperator = function(n) {
+	if (isBinary(getLastChar())) return;
+	
 	var phase = $("#simpleKeyBoard\\:phase");
 	if (phase.val() === "1" || phase.val() === "2") {
 		return;
@@ -218,6 +221,11 @@ var isUnuary = function(n) {
 	return (symbols.indexOf(n) != -1);
 }
 
+var isBinary = function(n) {
+	var symbols = ["+", "/", "*", "-", "^"];
+	return (symbols.indexOf(n) != -1);
+}
+
 
 
 // pressing enter
@@ -226,6 +234,7 @@ var keyBoardSubmit = function() {
 		var key = e.which;
 		if (key === 13) {
 			$("#simpleKeyBoard\\:keyEqualsSimples").click();
+			$("#simpleKeyBoard\\:keyEqualsCientifico").click();
 			return false;
 		}
 	});
