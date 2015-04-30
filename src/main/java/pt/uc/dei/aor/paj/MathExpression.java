@@ -78,8 +78,10 @@ public class MathExpression implements Serializable {
 	public void set(MathExpression exp) {
 		List<String> ops = Arrays.asList(new String[]{"*", "+", "/", "-", "^"});
 		if (ops.contains(expression.substring(expression.length()-1))) {
-			this.expression += "("+exp.expression+")";
+			this.expression += " ("+exp.expression+")";
 		}
+		else if (expression.substring(expression.length()-1).equals("("))
+			this.expression += " "+exp.expression;
 		else this.expression = exp.expression;
 		reset = 0;
 	}
@@ -127,10 +129,13 @@ public class MathExpression implements Serializable {
 	    public double apply(double... args) {
 	        final int arg = (int) args[0];
 	        if (arg != args[0]) {
-	            throw new IllegalArgumentException("Operand for factorial has to be an integer");
+	            throw new IllegalArgumentException("Factorial tem de ser inteiro");
 	        }
 	        if (arg < 0) {
-	            throw new IllegalArgumentException("The operand of the factorial can not be less than zero");
+	            throw new IllegalArgumentException("Factorial não pode ser negativo");
+	        }
+	        else if (arg > 170) {
+	        	throw new IllegalArgumentException("Capacidade excedida");
 	        }
 	        double result = 1;
 	        for (int i = 1; i <= arg; i++) {
@@ -149,10 +154,18 @@ public class MathExpression implements Serializable {
 			try {
 				expression = format(String.valueOf(e.evaluate()));
 				reset = 1;
+				if (expression.equals("NaN")) expression = "Dados inválidos";
+				
 				return true;
 			}
 			catch(ArithmeticException e1) {
 				expression = "Divisão por zero";
+				reset = 2;
+			}
+			catch(IllegalArgumentException e1) {
+				String m = e1.getMessage();
+				if (m.indexOf("Invalid number ") == 0) m = "Expressão inválida";
+				expression = m;
 				reset = 2;
 			}
 			catch(Exception e1) {

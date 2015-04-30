@@ -37,21 +37,21 @@
 					<h:commandButton value="sin" id="keySin" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig functionBtn normalScience"/>
 					<h:commandButton value="cos" id="keyCos" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig functionBtn normalScience"/>
 					<h:commandButton value="tan" id="keyTan" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig functionBtn normalScience"/>
-					<h:commandButton value="log" id="keyLog" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig functionBtn"/>
+					<h:commandButton value="(" id="keyParE" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig symbolBtn"/>
+					<h:commandButton value=")" id="keyParD" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig symbolBtn"/>
 					<h:commandButton value="sinh" id="keySinh" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig functionBtn "/>
 					<h:commandButton value="cosh" id="keyCosh" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig functionBtn "/>
 					<h:commandButton value="tanh" id="keyTanh" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig functionBtn "/>
+					<h:commandButton value="log" id="keyLog" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig functionBtn"/>
 					<h:commandButton value="ln" id="keyLn" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig functionBtn"/>
+					<h:commandButton value="&#x3c0;" id="keyPi" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig constantBtn"/>
+					<h:commandButton value="e" id="keyNep" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig constantBtn"/>
 					<h:commandButton value="&#8730;" id="keySqrt" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig functionBtn"/>
-					<h:commandButton value="(" id="keyParE" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig symbolBtn"/>
-					<h:commandButton value=")" id="keyParD" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig symbolBtn"/>
-					<h:commandButton value="&#x3c0;" id="keyPi" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig"/>
-					<h:commandButton value="10^x" id="keyNotCien" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig"/>
-					<h:commandButton value="x^2" id="keyQuad" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig"/>
-					<h:commandButton value="x^y" id="keyExp" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig"/>
-					<h:commandButton value="raiz qq" id="keyRaiz" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig"/>
+					<h:commandButton value="raiz qq" id="keyRaiz" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig binOpBtn"/>
 					<h:commandButton value="n!" id="keyFact" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig unOpBtn"/>
-					<h:commandButton value="e" id="keyNep" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig"/>
+					<h:commandButton value="x^2" id="keyQuad" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig unOpBtn "/>
+					<h:commandButton value="x" id="keyExp" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig binOpBtn" />
+					<h:commandButton value="Exp" id="keyNotCien" actionListener="#{simpleCalculator.pressKey}" styleClass="input_trig CieNotBtn"/>
 					<h:commandButton value="Inv" id="keyInv" action="cientificaInv.xhtml?faces-redirect=true" styleClass="input_trig invBtn"/>
 					
 				</h:panelGrid>
@@ -97,8 +97,6 @@
 						actionListener="#{simpleCalculator.pressKey}" styleClass="input_oper"/>
 					<h:commandButton value="-" id="keyMinus"
 						actionListener="#{simpleCalculator.pressKey}" styleClass="binOpBtn"/>
-					<h:commandButton value="%" id="keyPerc"
-						actionListener="#{simpleCalculator.pressKey}" styleClass="unOpBtn"/>
 					
 				</h:panelGrid>
 				

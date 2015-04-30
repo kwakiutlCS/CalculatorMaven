@@ -23,6 +23,11 @@ var detectBtnClick = function() {
 		return false;
 	});
 	
+	$(".CieNotBtn").click(function(e) {
+		addExp();
+		return false;
+	});
+	
 	$(".binOpBtn").click(function(e) {
 		var n = e.currentTarget.value;
 		addBinOperator(n);
@@ -57,6 +62,12 @@ var detectBtnClick = function() {
 		addSymbol(n);
 		return false;
 	});
+	
+	$(".constantBtn").click(function(e) {
+		var n = e.currentTarget.value;
+		addConstant(n);
+		return false;
+	});
 }
 
 
@@ -76,17 +87,39 @@ var addNumber = function(n) {
 	else if (isUnuary(getLastChar())) {
 		screen.val(text+" * "+n);
 	}
-	else if (isBinary(getLastChar())) {
-		screen.val(text+" "+n);
+	else if (isDigit(getLastChar())) {
+		screen.val(text+n);
 	}
 	else {
-		screen.val(text+n); 
+		screen.val(text+" "+n); 
 	}
 	phase.val("0");
 }
 
+
 // adds a dot if possible
 var addDot = function() {
+	cleanLastNumber();
+	var screen = $("#simpleKeyBoard\\:expression");
+	var phase = $("#simpleKeyBoard\\:phase");
+	if (phase.val() === "1" || phase.val() === "2") {
+		screen.val("");
+	}
+	
+	var last = getLastNumber();
+	if (last.indexOf('E') != -1) return;
+	
+	if (last.indexOf(".") === -1) {
+		if (last === "")
+			screen.val(screen.val()+" 0.");
+		else 
+			screen.val(screen.val()+".");
+	}
+	phase.val("0");
+}
+
+var addExp = function() {
+	cleanLastNumber();
 	var screen = $("#simpleKeyBoard\\:expression");
 	var phase = $("#simpleKeyBoard\\:phase");
 	if (phase.val() === "1" || phase.val() === "2") {
@@ -95,11 +128,11 @@ var addDot = function() {
 	
 	var last = getLastNumber();
 	
-	if (last.indexOf(".") === -1) {
+	if (last.indexOf("E") === -1) {
 		if (last === "")
-			screen.val(screen.val()+" 0.");
+			return;
 		else 
-			screen.val(screen.val()+".");
+			screen.val(screen.val()+"E");
 	}
 	phase.val("0");
 }
@@ -112,8 +145,8 @@ var addBinOperator = function(n) {
 		return;
 	}
 	var ignore = ["("];
-	var inputs = ["\u00D7", "-", "+", "\u00F7"];
-	var replace = ["*", "-", "+", "/"];
+	var inputs = ["\u00D7", "-", "+", "\u00F7", "x^y", "raiz qq"];
+	var replace = ["*", "-", "+", "/", "^", "^( 1 /"];
 	var output = replace[inputs.indexOf(n)];
 	var screen = $("#simpleKeyBoard\\:expression");
 	var text = screen.val();
@@ -121,7 +154,7 @@ var addBinOperator = function(n) {
 	$("#simpleKeyBoard\\:phase").val("0");
 	
 	if (replace.indexOf(lastLetter) != -1) {
-		screen.val(text.substring(0, text.length-1)+" "+output);
+		screen.val(text.substring(0, text.length-2)+" "+output);
 	}
 	else if (ignore.indexOf(lastLetter) === -1) {
 		screen.val(text+" "+output);
@@ -133,13 +166,13 @@ var addUnOperator = function(n) {
 	if (isBinary(getLastChar())) return;
 	
 	var phase = $("#simpleKeyBoard\\:phase");
-	if (phase.val() === "1" || phase.val() === "2") {
+	if (phase.val() === "2") {
 		return;
 	}
 	cleanLastNumber();
 	var ignore = ["(", ")"];
-	var inputs = ["%", "n!"];
-	var replace = ["%", "!"];
+	var inputs = ["%", "n!", "x^2"];
+	var replace = ["%", "!", "^ 2"];
 	var output = replace[inputs.indexOf(n)];
 	var screen = $("#simpleKeyBoard\\:expression");
 	var text = screen.val();
@@ -150,7 +183,10 @@ var addUnOperator = function(n) {
 		screen.val(text.substring(0, text.length-1)+output);
 	}
 	else if (ignore.indexOf(lastLetter) === -1) {
-		screen.val(text+output);
+		if (output === "^ 2")
+			screen.val(text+" "+output);
+		else
+			screen.val(text+output);
 	}
 }
 
@@ -163,6 +199,9 @@ var addSymOperator = function() {
 		return;
 	}
 	var lastNumber = getLastNumber();
+	if (lastNumber.indexOf('E') != -1) {
+		lastNumber = lastNumber.substring(lastNumber.indexOf('E')+1, lastNumber.length);
+	}
 	if (lastNumber === "0" || lastNumber === "") return;
 	
 	var screen = $("#simpleKeyBoard\\:expression");
@@ -176,6 +215,10 @@ var addSymOperator = function() {
 }
 
 var addFunction = function(n) {
+	var inputs = ["sin", "cos", "tan", "asin", "acos", "atan", "sinh", "cosh", "tanh", "log", "ln", "\u221A"];
+	var replace = ["sin", "cos", "tan", "asin", "acos", "atan", "sinh", "cosh", "tanh", "log10", "log", "sqrt"];
+	var output = replace[inputs.indexOf(n)];
+	
 	cleanLastNumber();
 	var phase = $("#simpleKeyBoard\\:phase");
 	var screen = $("#simpleKeyBoard\\:expression");
@@ -189,13 +232,11 @@ var addFunction = function(n) {
 		 text = (text.substring(0, text.length-1)); 
 	}
 	
-	if (isBinary(getLastChar()) || isDigit(getLastChar()))
-		text += " "+n+"(";
-	else if (isUnuary(getLastChar())) {
-		text += " * "+n+"(";
+	if (isUnuary(getLastChar())) {
+		text += " * "+output+"(";
 	}
 	else 
-		text += n+"(";
+		text += " "+output+"(";
 	
 	screen.val(text);
 	phase.val("0");
@@ -211,7 +252,37 @@ var addSymbol = function(n) {
 		text = "";
 	}
 	
-	text += n;
+	if (n === ")") {
+		if (isBinary(getLastChar()) || getLastChar() === '(') return;
+		var count = 0;
+		for (var i = 0; i < text.length; i++) {
+			if (text.charAt(i) === '(') count++;
+			else if (text.charAt(i) === ')') count--;
+		}
+		if (count <= 0) return;
+	}
+	else if (getLastNumber() === "0") {
+		text = text.substring(0, text.length-2);
+	}
+	text += " "+n;
+	screen.val(text);
+	phase.val("0");
+}
+
+
+var addConstant = function(n) {
+	cleanLastNumber();
+	var phase = $("#simpleKeyBoard\\:phase");
+	var screen = $("#simpleKeyBoard\\:expression");
+	var text = screen.val();
+	
+	if (getLastNumber() === "0") text = text.substring(0, text.length-2);
+	if (isConstant(getLastChar())) text += " *";
+	if (phase.val() === "1" || phase.val() === "2") {
+		text = "";
+	}
+	
+	text += " "+n;
 	screen.val(text);
 	phase.val("0");
 }
@@ -228,8 +299,13 @@ var clear = function(n) {
 	}
 	else {
 		sc = screen.val();
-		if (sc.length === 1) screen.val("0");
-		else screen.val(sc.substring(0, sc.length-1));
+		while (sc.charAt(sc.length-1) != ' ') {
+			sc = sc.substring(0, sc.length-1);
+			if (sc.length === 0) break;
+		}
+		if (sc.length > 0) sc = sc.substring(0, sc.length-1);
+		if (sc === "") sc = "0";
+		screen.val(sc);
 	}
 	
 	phase.val("0");
@@ -245,7 +321,7 @@ var getLastNumber = function() {
 	var char = screen.charAt(index);
 	var par = 0;
 	
-	while ((char >= "0" && char <= "9") || char === "." || char === ')' || par > 0) {
+	while ((char >= "0" && char <= "9") || char === "." || char === ')' || char === 'E' || par > 0) {
 		if (char === ')') par++;
 		else if (char === '(') par--;
 		lastNumber = char+lastNumber;
@@ -267,7 +343,7 @@ var getLastChar = function() {
 var cleanLastNumber = function() {
 	var screen = $("#simpleKeyBoard\\:expression");
 	var text = screen.val();
-	if (text.charAt(text.length-1) === '.') {
+	if (text.charAt(text.length-1) === '.' || text.charAt(text.length-1) === 'E') {
 		screen.val(text.substring(0, text.length-1));
 	}
 }
@@ -275,7 +351,7 @@ var cleanLastNumber = function() {
 
 // 
 var isUnuary = function(n) {
-	var symbols = ["%", "!"];
+	var symbols = ["%", "!", "^ 2"];
 	return (symbols.indexOf(n) != -1);
 }
 
@@ -285,11 +361,14 @@ var isBinary = function(n) {
 }
 
 var isDigit = function(n) {
-	var symbols = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."];
+	var symbols = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "E"];
 	return (symbols.indexOf(n) != -1);
 }
 
-
+var isConstant = function(n) {
+	var symbols = ["e", "\u03C0"];
+	return symbols.indexOf(n) != -1;
+}
 
 // pressing enter
 var keyBoardSubmit = function() {
