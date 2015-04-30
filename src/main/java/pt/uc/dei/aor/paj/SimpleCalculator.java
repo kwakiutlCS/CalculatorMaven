@@ -27,25 +27,21 @@ public class SimpleCalculator {
 	
 	public void pressKey(ActionEvent event) {
 		String id = event.getComponent().getId().substring(3);
-		System.out.println("key");
-		System.out.println(id);
+		
+		MathExpression clone;
 		switch(id) {
-		case "Clear": expression.clear(); break;
-		case "Back": expression.remove(); break;
 		case "EqualsSimples": 
-			history.addExpression(expression.getClone(), 1);
-			for (String s : expression.getEntries()) {
-				stats.add(s);
+			clone = expression.getClone();
+			if (expression.evaluate()) {
+				history.addExpression(clone, 1);
 			}
-			expression.evaluate(); 
 			break;
 		case "EqualsCientifico": 
-			history.addExpression(expression.getClone(), 2);
-			for (String s : expression.getEntries()) {
-				stats.add(s);
+			clone = expression.getClone();
+			if (expression.evaluate()) {
+				history.addExpression(clone, 2);
 			}
-			expression.evaluateScientific(angleUnitList.getChosenUnit()); break;
-		default: expression.add(id); break;
+			break;
 		}
 		
 	}
@@ -82,6 +78,16 @@ public class SimpleCalculator {
 
 	public void setAngleUnit(AngleUnit angleUnit) {
 		this.angleUnit = angleUnit;
+	}
+
+
+	public Statistics getStats() {
+		return stats;
+	}
+
+
+	public void setStats(Statistics stats) {
+		this.stats = stats;
 	}
 
 
