@@ -1,9 +1,10 @@
 $(function() {
 	detectBtnClick();
 	keyBoardSubmit();
-	//$(".invCientific").hide();
 	disableInput();
 	detectPressedKeys();
+	changeScienceView();
+	
 });
 
 
@@ -322,5 +323,20 @@ var detectPressedKeys = function() {
 			$("#simpleKeyBoard\\:key"+mapping[key]).click();
 		}
 	});
+}
+
+
+var changeScienceView = function() {
+	$(".invBtn").click(function() {
+		$.each($(".normalScience"), function() {
+			var o = $(this);
+			var text = o.val();
+			if (text.charAt(0) != 'a')
+				o.val("a"+text);
+			else
+				o.val(text.substring(1, text.length));
+		});
+		return false;
+	});	
 }
 

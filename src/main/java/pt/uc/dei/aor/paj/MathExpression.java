@@ -105,8 +105,6 @@ public class MathExpression implements Serializable {
 	
 	
 	private String convert(String angleUnit) {
-//		System.out.println(entries);
-//		System.out.println(formExpression(entries));
 //		String conversionFactor = null;
 //		if (angleUnit.equals("Radianos")) return formExpression(entries);
 //		else if (angleUnit.equals("Graus")) conversionFactor = String.valueOf(Math.PI/180)+"*";
@@ -119,8 +117,6 @@ public class MathExpression implements Serializable {
 //			}
 //		}
 //		
-//		System.out.println(entries);
-//		System.out.println(formExpression(entries));
 //		return formExpression(entries);
 		return "";
 	}

@@ -34,12 +34,14 @@ public class SimpleCalculator {
 			clone = expression.getClone();
 			if (expression.evaluate()) {
 				history.addExpression(clone, 1);
+				stats.add(clone.getExpression());
 			}
 			break;
 		case "EqualsCientifico": 
 			clone = expression.getClone();
 			if (expression.evaluate()) {
 				history.addExpression(clone, 2);
+				stats.add(clone.getExpression());
 			}
 			break;
 		}
