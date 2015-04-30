@@ -17,9 +17,9 @@ public class Statistics {
 	
 	public Statistics() {
 		descriptions = Arrays.asList(new String[]{"Adição", "Subtracção", "Multiplicação", "Divisão", "Percentagem", "Seno",
-				"Coseno", "Tangente", "Logaritmo base 10", "Logaritmo natural", "Seno hiperbólico",
-				"Tangente hiperbólico", "Coseno hiperbólico", "Raiz quadrada", "Expoente", "Factorial"});
-		symbols = Arrays.asList(new String[]{"+", "-", "*", "/", "%", "sin(", "cos(", "tan(", "log(", "ln(", "sinh(",
+				"Coseno", "Tangente", "Arco Seno", "Arco Coseno", "Arco Tangente", "Logaritmo base 10", "Logaritmo natural", "Seno hiperbólico",
+				"Tangente hiperbólica", "Coseno hiperbólico", "Raiz quadrada", "Expoente", "Factorial"});
+		symbols = Arrays.asList(new String[]{"+", "-", "*", "/", "%", "sin(", "cos(", "tan(","asin(", "acos(", "atan(", "log(", "ln(", "sinh(",
 				"tanh(", "cosh(", "sqrt(", "^", "!"});
 		counter = new HashMap<>();
 		for (String s : symbols) {
@@ -29,10 +29,24 @@ public class Statistics {
 	
 	
 	public void add(String s) {
-		if (counter.containsKey(s))
-			counter.put(s, counter.get(s)+1);
+		for (String symbol : symbols) {
+			counter.put(symbol, counter.get(symbol)+countOcurrences(s, symbol));
+		}
 	}
 
+	
+	private int countOcurrences(String s, String sub) {
+		int c = 0;
+		int lastIndex = 0;
+		
+		while (s.indexOf(sub, lastIndex) != -1) {
+			System.out.println(lastIndex);
+			c++;
+			lastIndex = s.indexOf(sub, lastIndex)+1;
+		}
+		
+		return c;
+	}
 
 	public int getSymbolCount(String s) {
 		return counter.get(symbols.get(descriptions.indexOf(s)));
