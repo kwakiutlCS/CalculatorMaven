@@ -12,19 +12,15 @@
 }
 
 #visor {
-   background-color: #bdffb4;
-   text-align: ;
-   width: 390px;
-   height:50px;
    margin-top:150px;
    margin-left:200px;
 }
 
 #visor1 {
-   background-color: #bdffb4;
-   text-align: ;
-   width: 390px;
-   height:50px;
+  
+  
+  maxlength:50px;
+   size:100px;
    margin-top:150px;
    margin-left:60px;
 }
@@ -132,7 +128,7 @@ table.cientifico {
 	height:350px;
 	 margin-left:500px;
    margin-top:200px;
-   font:bold 14px arial;
+   font:bold 15px arial;
 	
 }
 

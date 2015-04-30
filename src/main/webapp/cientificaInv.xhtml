@@ -14,14 +14,16 @@
         <title>Calculator</title>
     </h:head>
     <h:body >
-    	<div id="fundo">
-    	
     	 <ui:composition template="comum.xhtml">
+    	 <ui:define name="extraHead">
+     		 <h:outputScript library="js" name="script.js" />
+     	</ui:define>
+     	
     	<ui:define name="conteudo">
     	
 		<h:form>
 			<div id="visor">
-				<h:outputText id="expression" value="#{simpleCalculator.expression}" />
+				<h:outputText id="expression" value="#{simpleCalculator.expression}" maxlength="33" size="40"/>
 			</div>
 
 			
@@ -76,7 +78,7 @@
 						actionListener="#{simpleCalculator.pressKey}" styleClass="num"/>
 					<h:commandButton value="&#xd7;" id="keyMult"
 						actionListener="#{simpleCalculator.pressKey}" styleClass="input_oper"/>
-					<h:commandButton value="&#x232b;" id="keyBack"
+					<h:commandButton value="CE" id="keyBack"
 						 actionListener="#{simpleCalculator.pressKey}" styleClass="input_clear"/>
 					<h:commandButton value="1" id="key1"
 						actionListener="#{simpleCalculator.pressKey}" styleClass="num"/>
@@ -113,7 +115,7 @@
 		</h:form>
 		</ui:define>
 		</ui:composition>
-	</div>
+
         
     </h:body>
 </html>
