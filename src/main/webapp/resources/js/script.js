@@ -1,7 +1,8 @@
 $(function() {
 	detectBtnClick();
 	keyBoardSubmit();
-	$(".invCientific").hide();
+	//$(".invCientific").hide();
+	disableInput();
 });
 
 
@@ -237,5 +238,17 @@ var keyBoardSubmit = function() {
 			$("#simpleKeyBoard\\:keyEqualsCientifico").click();
 			return false;
 		}
+	});
+}
+
+var disableInput = function() {
+	$("#simpleKeyBoard\\:expression").keypress(function() {
+		return false;
+	});
+	$("#simpleKeyBoard\\:expression").keydown(function() {
+		return false;
+	});
+	$("#simpleKeyBoard\\:expression").keyup(function() {
+		return false;
 	});
 }

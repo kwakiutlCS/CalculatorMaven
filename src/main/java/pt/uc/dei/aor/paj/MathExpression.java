@@ -156,7 +156,7 @@ public class MathExpression implements Serializable {
 				return true;
 			}
 			catch(ArithmeticException e1) {
-				expression = "Erro";
+				expression = "Divisão por zero";
 				reset = 2;
 			}
 			catch(Exception e1) {
