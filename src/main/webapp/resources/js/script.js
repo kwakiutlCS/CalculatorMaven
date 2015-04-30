@@ -50,6 +50,12 @@ var detectBtnClick = function() {
 		addFunction(n);
 		return false;
 	});
+	
+	$(".symbolBtn").click(function(e) {
+		var n = e.currentTarget.value;
+		addSymbol(n);
+		return false;
+	});
 }
 
 
@@ -128,8 +134,8 @@ var addUnOperator = function(n) {
 	}
 	cleanLastNumber();
 	var ignore = ["(", ")"];
-	var inputs = ["%"];
-	var replace = ["%"];
+	var inputs = ["%", "n!"];
+	var replace = ["%", "!"];
 	var output = replace[inputs.indexOf(n)];
 	var screen = $("#simpleKeyBoard\\:expression");
 	var text = screen.val();
@@ -180,6 +186,21 @@ var addFunction = function(n) {
 	}
 	
 	text += n+"(";
+	screen.val(text);
+	phase.val("0");
+}
+
+var addSymbol = function(n) {
+	cleanLastNumber();
+	var phase = $("#simpleKeyBoard\\:phase");
+	var screen = $("#simpleKeyBoard\\:expression");
+	var text = screen.val();
+	
+	if (phase.val() === "1" || phase.val() === "2") {
+		text = "";
+	}
+	
+	text += n;
 	screen.val(text);
 	phase.val("0");
 }
