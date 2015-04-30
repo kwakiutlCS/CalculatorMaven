@@ -74,7 +74,10 @@ var addNumber = function(n) {
 		screen.val(text.substring(0, text.length-1)+n); 
 	}
 	else if (isUnuary(getLastChar())) {
-		screen.val(text+"*"+n);
+		screen.val(text+" * "+n);
+	}
+	else if (isBinary(getLastChar())) {
+		screen.val(text+" "+n);
 	}
 	else {
 		screen.val(text+n); 
@@ -94,7 +97,7 @@ var addDot = function() {
 	
 	if (last.indexOf(".") === -1) {
 		if (last === "")
-			screen.val(screen.val()+"0.");
+			screen.val(screen.val()+" 0.");
 		else 
 			screen.val(screen.val()+".");
 	}
@@ -118,10 +121,10 @@ var addBinOperator = function(n) {
 	$("#simpleKeyBoard\\:phase").val("0");
 	
 	if (replace.indexOf(lastLetter) != -1) {
-		screen.val(text.substring(0, text.length-1)+output);
+		screen.val(text.substring(0, text.length-1)+" "+output);
 	}
 	else if (ignore.indexOf(lastLetter) === -1) {
-		screen.val(text+output);
+		screen.val(text+" "+output);
 	}
 }
 
@@ -186,7 +189,14 @@ var addFunction = function(n) {
 		 text = (text.substring(0, text.length-1)); 
 	}
 	
-	text += n+"(";
+	if (isBinary(getLastChar()) || isDigit(getLastChar()))
+		text += " "+n+"(";
+	else if (isUnuary(getLastChar())) {
+		text += " * "+n+"(";
+	}
+	else 
+		text += n+"(";
+	
 	screen.val(text);
 	phase.val("0");
 }
@@ -271,6 +281,11 @@ var isUnuary = function(n) {
 
 var isBinary = function(n) {
 	var symbols = ["+", "/", "*", "-", "^"];
+	return (symbols.indexOf(n) != -1);
+}
+
+var isDigit = function(n) {
+	var symbols = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."];
 	return (symbols.indexOf(n) != -1);
 }
 
