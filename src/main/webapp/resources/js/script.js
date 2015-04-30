@@ -3,6 +3,7 @@ $(function() {
 	keyBoardSubmit();
 	//$(".invCientific").hide();
 	disableInput();
+	detectPressedKeys();
 });
 
 
@@ -42,8 +43,13 @@ var detectBtnClick = function() {
 	$(".symBtn").click(function(e) {
 		addSymOperator();
 		return false;
-	})
+	});
 	
+	$(".functionBtn").click(function(e) {
+		var n = e.currentTarget.value;
+		addFunction(n);
+		return false;
+	});
 }
 
 
@@ -159,6 +165,25 @@ var addSymOperator = function() {
 	screen.val(text);
 }
 
+var addFunction = function(n) {
+	cleanLastNumber();
+	var phase = $("#simpleKeyBoard\\:phase");
+	var screen = $("#simpleKeyBoard\\:expression");
+	var text = screen.val();
+	
+	if (phase.val() === "1" || phase.val() === "2") {
+		text = "";
+	}
+	
+	if (getLastNumber() === "0") {
+		 text = (text.substring(0, text.length-1)); 
+	}
+	
+	text += n+"(";
+	screen.val(text);
+	phase.val("0");
+}
+
 
 // deletes screen
 var clear = function(n) {
@@ -252,3 +277,29 @@ var disableInput = function() {
 		return false;
 	});
 }
+
+//deals with keyboard strokes
+var detectPressedKeys = function() {
+	$(document).keydown(function(e) {
+		var key = e.which;
+		var mapping = {
+				13: "EqualsSimples",
+				106: "Mult",
+				107: "Add",
+				109: "Minus",
+				110: "Dot",
+				111: "Div",
+		};
+		
+		if (key >= 48 && key <= 57) {
+			$("#simpleKeyBoard\\:key"+(key-48)).click();
+		}
+		else if (key >= 96 && key <= 105) {
+			$("#simpleKeyBoard\\:key"+(key-96)).click();
+		}
+		else if (key in mapping) {
+			$("#simpleKeyBoard\\:key"+mapping[key]).click();
+		}
+	});
+}
+
