@@ -18,9 +18,9 @@ public class Statistics {
 	public Statistics() {
 		descriptions = Arrays.asList(new String[]{"Adição", "Subtracção", "Multiplicação", "Divisão", "Percentagem", "Seno",
 				"Coseno", "Tangente", "Arco Seno", "Arco Coseno", "Arco Tangente", "Logaritmo base 10", "Logaritmo natural", "Seno hiperbólico",
-				"Tangente hiperbólica", "Coseno hiperbólico", "Raiz quadrada", "Expoente", "Factorial"});
+				"Tangente hiperbólica", "Coseno hiperbólico", "Raiz quadrada", "Expoente", "Factorial", "Resto"});
 		symbols = Arrays.asList(new String[]{"+", "-", "*", "/", "%", " sin(", " cos(", " tan("," asin(", " acos(", " atan(", " log10(", "log(", "sinh(",
-				" tanh(", " cosh(", " sqrt(", "^", "!"});
+				" tanh(", " cosh(", " sqrt(", "^", "!", "mod"});
 
 		stats = new ArrayList<>();
 		for (int i = 0; i < symbols.size(); i++) {

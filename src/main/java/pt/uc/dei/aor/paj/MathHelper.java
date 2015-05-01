@@ -22,6 +22,7 @@ public class MathHelper {
 	}
 	
 	public static String evaluateScientific(String expression, String angleUnit) {
+		expression = expression.replaceAll("mod", "%");
 		try {
 			expression = convert(expression, angleUnit);
 		}
