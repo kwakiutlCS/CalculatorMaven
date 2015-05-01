@@ -138,7 +138,7 @@ public class MathHelper {
 		if (angleUnit.equals("Radianos")) return expression;
 		
 		double factor = Math.PI/180;
-		if (angleUnit.equals("Grad")) factor = Math.PI/200;
+		if (angleUnit.equals("Grados")) factor = Math.PI/200;
 		String res = expression;
 		
 		String[] direct = new String[]{" sin", " cos", " tan", " sinh", " cosh", " tanh"};

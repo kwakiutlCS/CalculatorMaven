@@ -52,9 +52,6 @@ public class SimpleCalculator {
 		expression.clear();
 	}
 	
-	public void sortStats() {
-		stats.sort();
-	}
 	
 	// getters and setters
 	public MathExpression getExpression() {

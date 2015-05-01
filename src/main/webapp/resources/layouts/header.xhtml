@@ -14,11 +14,11 @@
 		ou 
 		<h:commandLink action="cientifica?faces-redirect=true" actionListener="#{simpleCalculator.resetScreen}" value="cientifica" />
 		<br></br>
+		</h:form>
 		Pretende conhecer as operações mais utilizadas? Clique neste
 		link: 
-		<h:commandLink action="stats.xhtml?faces-redirect=true" actionListener="#{simpleCalculator.sortStats}" value="estatistica" />
+		<h:link outcome="stats.xhtml?faces-redirect=true" value="estatistica" />
 		
-		</h:form>
 		
 	</ui:composition>
 </h:body>

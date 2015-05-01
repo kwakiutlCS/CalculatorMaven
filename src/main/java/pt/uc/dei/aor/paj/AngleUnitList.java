@@ -19,7 +19,7 @@ public class AngleUnitList implements Serializable{
 		units = new ArrayList<>();
 		units.add("Radianos");
 		units.add("Graus");
-		units.add("Grad");
+		units.add("Grados");
 		chosenUnit = "Radianos";
 	}
 

@@ -34,6 +34,7 @@ public class Statistics {
 		for (Stat stat : stats) {
 			stat.add(countOcurrences(s, stat.getSymbol()));
 		}
+		sort();
 	}
 
 	
