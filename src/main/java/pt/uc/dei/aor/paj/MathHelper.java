@@ -145,8 +145,12 @@ public class MathHelper {
 			e = new ExpressionBuilder(expression).operator(factorial)
 					.variables("\u03C0", "e").build().setVariable("e", Math.E).setVariable("\u03C0", Math.PI);
 			try {
-				expression = format(String.valueOf(e.evaluate()));
-				if (expression.equals("NaN")) expression = "Dados inválidos";
+				double res = e.evaluate();
+				if (Double.isInfinite(res)) expression = "Capacidade excedida";
+				else {
+					expression = format(String.valueOf(res));
+					if (expression.equals("NaN")) expression = "Dados inválidos";
+				}
 			}
 			catch(ArithmeticException e1) {
 				expression = "Divisão por zero";
