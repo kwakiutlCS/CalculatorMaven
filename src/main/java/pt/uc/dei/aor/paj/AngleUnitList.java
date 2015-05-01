@@ -38,9 +38,4 @@ public class AngleUnitList implements Serializable{
 	public void setChosenUnit(String chosenUnit) {
 		this.chosenUnit = chosenUnit;
 	}
-
-	
-
-	
-	
 }

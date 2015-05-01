@@ -72,7 +72,7 @@ public class MathExpression implements Serializable {
 	}
 	
 	public void set(MathExpression exp) {
-		if (expression.length() > 29) return;
+		if (expression.length()+exp.expression.length() > 37 || exp.expression.indexOf('%') != -1) return;
 		List<String> ops = Arrays.asList(new String[]{"*", "+", "/", "-", "^"});
 		if (ops.contains(expression.substring(expression.length()-1))) {
 			this.expression += " ("+exp.expression+")";

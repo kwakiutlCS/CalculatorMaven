@@ -9,7 +9,16 @@ public class MathHelper {
 	
 
 	public static String evaluateSimple(String expression) {
-		return evaluate(expression);
+		try {
+			String exp = expression;
+			while (exp.indexOf('%') != -1)
+				exp = process(exp);
+			return evaluate(exp);
+		}
+		catch (Exception e) {
+			return evaluate("1+");
+		}
+		
 	}
 	
 	public static String evaluateScientific(String expression, String angleUnit) {
@@ -23,12 +32,45 @@ public class MathHelper {
 	}
 
 	
-	
-	
-	
-	
-	
 	// helper functions
+	private static String process(String exp) {
+		int index = exp.indexOf('%');
+		
+		String p = getLastNumber(exp, index);
+		String b = getPreviousValue(exp, index-(p.length()+2));
+		double per = new ExpressionBuilder(p).build().evaluate();
+		double base = new ExpressionBuilder(b).build().evaluate();
+
+		String res = String.valueOf(base)+exp.substring(b.length(), b.length()+2)+base*per/100+exp.substring(b.length()+p.length()+3);
+		
+		System.out.println(res);
+		return res;
+	}
+	
+	private static String getLastNumber(String exp, int index) {
+		int counter = 0;
+		int i = index-1;
+		char c = exp.charAt(i);
+		String v = "";
+		
+		while (c == '(' || c == ')' || c == 'E' || c == '.' || (c >= '0' && c <= '9') || counter > 0) {
+			if (c == '(') counter--;
+			else if (c == ')') counter++;
+			v = c+v;
+			if (i == 0) break;
+			c = exp.charAt(--i);
+		}
+		return v;
+		
+	}
+	
+	private static String getPreviousValue(String exp, int index) {
+		return exp.substring(0, index);
+	}
+	
+	
+	
+	
 	private static String format(String s) {
 		if (s.charAt(0) == '.') s = "0"+s;
 		int index = s.indexOf('.');
