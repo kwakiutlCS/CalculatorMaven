@@ -15,8 +15,7 @@ public class MathExpression implements Serializable {
 	private int reset;
 	
 	public MathExpression() {
-		reset = 0;
-		expression = "0";
+		clear();
 	}
 
 	@Override
@@ -66,7 +65,6 @@ public class MathExpression implements Serializable {
 	
 	public MathExpression getClone() {
 		MathExpression exp = new MathExpression();
-		
 		exp.reset = reset;
 		exp.expression = expression;
 		
@@ -91,5 +89,10 @@ public class MathExpression implements Serializable {
 
 	public void setReset(int reset) {
 		this.reset = reset;
+	}
+	
+	public void clear() {
+		expression = "0";
+		reset = 0;
 	}
 }

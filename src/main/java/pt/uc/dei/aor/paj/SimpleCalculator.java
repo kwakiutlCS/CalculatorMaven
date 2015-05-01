@@ -15,16 +15,12 @@ public class SimpleCalculator {
 	@Inject
 	private AngleUnitList angleUnitList;
 	@Inject
-	private AngleUnit angleUnit;
-	@Inject
 	private Statistics stats;
-	
 	
 	public SimpleCalculator() {
 		
 	}
 
-	
 	public void pressKey(ActionEvent event) {
 		String id = event.getComponent().getId().substring(3);
 		
@@ -48,9 +44,12 @@ public class SimpleCalculator {
 		
 	}
 	
-	
 	public void reuseExpression(MathExpression exp) {
 		expression.set(exp);
+	}
+	
+	public void resetScreen() {
+		expression.clear();
 	}
 	
 	// getters and setters
@@ -62,7 +61,6 @@ public class SimpleCalculator {
 		this.expression = expression;
 	}
 
-
 	public History getHistory() {
 		return history;
 	}
@@ -72,27 +70,11 @@ public class SimpleCalculator {
 		this.history = history;
 	}
 
-
-	public AngleUnit getAngleUnit() {
-		return angleUnit;
-	}
-
-
-	public void setAngleUnit(AngleUnit angleUnit) {
-		this.angleUnit = angleUnit;
-	}
-
-
 	public Statistics getStats() {
 		return stats;
 	}
 
-
 	public void setStats(Statistics stats) {
 		this.stats = stats;
 	}
-
-
-
-	
 }

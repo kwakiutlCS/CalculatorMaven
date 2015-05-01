@@ -7,20 +7,18 @@
 
 <h:body>
 <ui:composition>
-	<div id="texto">
-		<h:graphicImage url="#{resource['images:calculadora.gif']}" />
-
-		<h> Se pretender mudar de calculadora clique no link a seguir: </h>
-		<h:link outcome="index.xhtml" value="normal" />
-		<h> ou </h>
-		<h:link outcome="cientifica.xhtml" value="cientifica" />
+	<h:graphicImage url="#{resource['images:calculadora.gif']}" />
+		<h:form class="headerForm">
+		Se pretender mudar de calculadora clique no link a seguir: 
+		<h:commandLink action="index" actionListener="#{simpleCalculator.resetScreen}" value="normal" />
+		ou 
+		<h:commandLink action="cientifica" actionListener="#{simpleCalculator.resetScreen}" value="cientifica" />
 		<br></br>
-		<h> Pretende conhecer as operações mais utilizadas? Clique neste
-		link: </h>
+		</h:form>
+		Pretende conhecer as operações mais utilizadas? Clique neste
+		link: 
 		<h:link outcome="stats.xhtml" value="estatistica" />
-
-
-	</div>
+		
 	</ui:composition>
 </h:body>
 

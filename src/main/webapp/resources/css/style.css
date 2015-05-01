@@ -147,7 +147,7 @@ table.cientifico {
 	font-size: 12px;
 }
 
-#foot { 
+footer { 
  	position: absolute; 
  	left: 0%; 
  	right: 0%; 
@@ -158,7 +158,7 @@ table.cientifico {
  	font:bold italic 14px Tahoma; 
  } 
  
- #header {
+ header {
 	position: absolute;
 	left: 0%;
 	right: 0%;
@@ -171,4 +171,8 @@ table.cientifico {
 
 #simpleKeyBoard\:expression {
 	text-align: right;
+}
+
+.headerForm {
+	display: inline;
 }
