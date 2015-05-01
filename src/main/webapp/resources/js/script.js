@@ -223,8 +223,8 @@ var addSymOperator = function() {
 }
 
 var addFunction = function(n) {
-	var inputs = ["sin", "cos", "tan", "asin", "acos", "atan", "sinh", "cosh", "tanh", "log", "ln", "\u221A"];
-	var replace = ["sin", "cos", "tan", "asin", "acos", "atan", "sinh", "cosh", "tanh", "log10", "log", "sqrt"];
+	var inputs = ["sin", "cos", "tan", "asin", "acos", "atan", "sinh", "cosh", "tanh", "log", "ln", "\u221A", "asinh", "acosh", "atanh"];
+	var replace = ["sin", "cos", "tan", "asin", "acos", "atan", "sinh", "cosh", "tanh", "log10", "log", "sqrt", "asinh", "acosh", "atanh"];
 	var output = replace[inputs.indexOf(n)];
 	
 	cleanLastNumber();

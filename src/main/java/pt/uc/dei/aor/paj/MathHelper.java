@@ -3,11 +3,54 @@ package pt.uc.dei.aor.paj;
 
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
+import net.objecthunter.exp4j.function.Function;
 import net.objecthunter.exp4j.operator.Operator;
 
 public class MathHelper {
-	
+	private static Function asinh = new Function("asinh", 1) {
+		@Override
+	    public double apply(double... args) {
+	        double a = args[0];
+	        return Math.log(a+Math.sqrt(1+a*a));
+	    }
+	};
+	private static Function acosh = new Function("acosh", 1) {
+		@Override
+	    public double apply(double... args) {
+	        double a = args[0];
+	        return Math.log(a+Math.sqrt(a*a-1));
+	    }
+	};
+	private static Function atanh = new Function("atanh", 1) {
+		@Override
+	    public double apply(double... args) {
+	        double a = args[0];
+	        return Math.log((1+a)/(1-a))/2;
+	    }
+	};
+	private static Operator factorial = new Operator("!", 1, true, Operator.PRECEDENCE_POWER + 1) {
 
+	    @Override
+	    public double apply(double... args) {
+	        final int arg = (int) args[0];
+	        if (arg != args[0]) {
+	            throw new IllegalArgumentException("Factorial tem de ser inteiro");
+	        }
+	        if (arg < 0) {
+	            throw new IllegalArgumentException("Factorial não pode ser negativo");
+	        }
+	        else if (arg > 170) {
+	        	throw new IllegalArgumentException("Capacidade excedida");
+	        }
+	        double result = 1;
+	        for (int i = 1; i <= arg; i++) {
+	            result *= i;
+	        }
+	        return result;
+	    }
+	};
+	
+	
 	public static String evaluateSimple(String expression) {
 		try {
 			String exp = expression;
@@ -160,32 +203,12 @@ public class MathHelper {
 		return s.substring(index, end);
 	}
 	
-	private static Operator factorial = new Operator("!", 1, true, Operator.PRECEDENCE_POWER + 1) {
-
-	    @Override
-	    public double apply(double... args) {
-	        final int arg = (int) args[0];
-	        if (arg != args[0]) {
-	            throw new IllegalArgumentException("Factorial tem de ser inteiro");
-	        }
-	        if (arg < 0) {
-	            throw new IllegalArgumentException("Factorial não pode ser negativo");
-	        }
-	        else if (arg > 170) {
-	        	throw new IllegalArgumentException("Capacidade excedida");
-	        }
-	        double result = 1;
-	        for (int i = 1; i <= arg; i++) {
-	            result *= i;
-	        }
-	        return result;
-	    }
-	};
+	
 	
 	private static String evaluate(String expression) {
 		Expression e;
 		try {
-			e = new ExpressionBuilder(expression).operator(factorial)
+			e = new ExpressionBuilder(expression).operator(factorial).function(asinh).function(acosh).function(atanh)
 					.variables("\u03C0", "e").build().setVariable("e", Math.E).setVariable("\u03C0", Math.PI);
 			try {
 				double res = e.evaluate();
@@ -214,6 +237,7 @@ public class MathHelper {
 	}
 
 
+	
 	
 	
 }
