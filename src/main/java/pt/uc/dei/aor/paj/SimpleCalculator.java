@@ -39,7 +39,7 @@ public class SimpleCalculator {
 			break;
 		case "EqualsCientifico": 
 			clone = expression.getClone();
-			if (expression.evaluate()) {
+			if (expression.evaluateScientific(angleUnitList.getChosenUnit())) {
 				history.addExpression(clone, 2);
 				stats.add(clone.getExpression());
 			}

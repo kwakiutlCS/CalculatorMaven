@@ -12,6 +12,10 @@ $(function() {
 
 // overrides button click
 var detectBtnClick = function() {
+	var screen = $("#simpleKeyBoard\\:expression");
+	var text = screen.val();
+	if (text.length > 29) return false;
+	
 	$(".num").click(function(e) {
 		var n = e.currentTarget.value;
 		addNumber(n);
@@ -170,7 +174,7 @@ var addUnOperator = function(n) {
 		return;
 	}
 	cleanLastNumber();
-	var ignore = ["(", ")"];
+	var ignore = ["("];
 	var inputs = ["%", "n!", "x^2"];
 	var replace = ["%", "!", "^ 2"];
 	var output = replace[inputs.indexOf(n)];

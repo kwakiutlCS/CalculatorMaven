@@ -45,7 +45,13 @@ public class MathExpression implements Serializable {
 
 
 	public boolean evaluateScientific(String angleUnit) {
-		String exp = convert(angleUnit);
+		String exp;
+		try {
+			exp = convert(angleUnit);
+		}
+		catch (Exception e) {
+			return evaluate("3+");
+		}
 		return evaluate(exp);
 	}
 
@@ -76,6 +82,7 @@ public class MathExpression implements Serializable {
 	
 	
 	public void set(MathExpression exp) {
+		if (expression.length() > 29) return;
 		List<String> ops = Arrays.asList(new String[]{"*", "+", "/", "-", "^"});
 		if (ops.contains(expression.substring(expression.length()-1))) {
 			this.expression += " ("+exp.expression+")";
@@ -105,22 +112,75 @@ public class MathExpression implements Serializable {
 		return s;
 	}
 	
-	
+
 	private String convert(String angleUnit) {
-//		String conversionFactor = null;
-//		if (angleUnit.equals("Radianos")) return formExpression(entries);
-//		else if (angleUnit.equals("Graus")) conversionFactor = String.valueOf(Math.PI/180)+"*";
-//		
-//		List<String> trig = Arrays.asList(new String[]{"cos(", "sin(", "tan(", "cosh(", "sinh(", "tanh("});
-//		for (String f : trig) {
-//			int index = 0;
-//			if ((index = entries.indexOf(f)) != -1) {
-//				entries.add(index+1, conversionFactor);
-//			}
-//		}
-//		
-//		return formExpression(entries);
-		return "";
+		if (angleUnit.equals("Radianos")) return expression;
+		
+		double factor = Math.PI/180;
+		String res = expression;
+		
+		String[] direct = new String[]{" sin", " cos", " tan", " sinh", " cosh", " tanh"};
+		String[] inverse = new String[]{" asin", " acos", " atan"};
+		for (String f : direct) {
+			int lastIndex = 0;
+			
+			while ((lastIndex = res.indexOf(f, lastIndex)+1) > 0) {
+				String arg = getArg(res, lastIndex);
+				res = res.substring(0, lastIndex)+f+"("+factor+"*("+arg+")"+res.substring(lastIndex+f.length()+arg.length());
+				lastIndex += arg.length();
+			}
+			
+		}
+		
+		for (String f : inverse) {
+			int lastIndex = 0;
+			
+			while ((lastIndex = res.indexOf(f, lastIndex)+1) > 0) {
+				String arg = getArg(res, lastIndex);
+				String fun = getFunction(res, lastIndex);
+				System.out.println(fun);
+				res = res.substring(0, lastIndex)+"((1/"+factor+")*"+fun+")"+res.substring(lastIndex+fun.length());
+				lastIndex += fun.length();
+				System.out.println(res);
+			}
+			
+		}
+		
+		return res;
+	}
+	
+	private String getArg(String s, int index) {
+		int begin = index;
+		while (s.charAt(begin) != '(') {
+			begin++;
+		}
+		begin++;
+		
+		int end = begin;
+		int counter = 1;
+		while (counter > 0) {
+			end++;
+			if (s.charAt(end) == '(') counter++;
+			else if (s.charAt(end) == ')') counter--;
+		}
+		
+		return s.substring(begin, end);
+	}
+	
+	private String getFunction(String s, int index) {
+		int end = index;
+		int counter = 0;
+		boolean start = false;
+		while (counter > 0 || !start) {
+			end++;
+			if (s.charAt(end) == '(') {
+				start = true;
+				counter++;
+			}
+			else if (s.charAt(end) == ')') counter--;
+		}
+		
+		return s.substring(index, end);
 	}
 	
 	private Operator factorial = new Operator("!", 1, true, Operator.PRECEDENCE_POWER + 1) {
