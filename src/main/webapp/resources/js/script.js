@@ -149,7 +149,7 @@ var addBinOperator = function(n) {
 		return;
 	}
 	var ignore = ["("];
-	var inputs = ["\u00D7", "-", "+", "\u00F7", "x^y", "raiz qq"];
+	var inputs = ["\u00D7", "-", "+", "\u00F7", "x"+"\u02B8", "\u02B8\u221A"];
 	var replace = ["*", "-", "+", "/", "^", "^( 1 /"];
 	var output = replace[inputs.indexOf(n)];
 	var screen = $("#simpleKeyBoard\\:expression");
@@ -175,7 +175,7 @@ var addUnOperator = function(n) {
 	}
 	cleanLastNumber();
 	var ignore = ["("];
-	var inputs = ["%", "n!", "x^2"];
+	var inputs = ["%", "n!", "x"+"\u00B2"];
 	var replace = ["%", "!", "^ 2"];
 	var output = replace[inputs.indexOf(n)];
 	var screen = $("#simpleKeyBoard\\:expression");
