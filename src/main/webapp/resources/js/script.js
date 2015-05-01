@@ -392,6 +392,13 @@ var disableInput = function() {
 	$("#simpleKeyBoard\\:expression").keyup(function() {
 		return false;
 	});
+	
+	$("#simpleKeyBoard\\:expression").click(function() {
+		return false;
+	});
+	$("#simpleKeyBoard\\:expression").mousedown(function() {
+		return false;
+	});
 }
 
 //deals with keyboard strokes
