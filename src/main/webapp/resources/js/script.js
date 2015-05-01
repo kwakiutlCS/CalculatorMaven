@@ -127,7 +127,7 @@ var addExp = function() {
 	var screen = $("#simpleKeyBoard\\:expression");
 	var phase = $("#simpleKeyBoard\\:phase");
 	if (phase.val() === "1" || phase.val() === "2") {
-		screen.val("");
+		return;
 	}
 	
 	var last = getLastNumber();
