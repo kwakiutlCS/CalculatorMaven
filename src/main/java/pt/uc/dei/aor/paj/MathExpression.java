@@ -53,7 +53,7 @@ public class MathExpression implements Serializable {
 	public boolean equals(Object other) {
 		if (other instanceof MathExpression) {
 			MathExpression o = (MathExpression) other;
-			return o.expression.equals(expression);
+			return (o.expression.trim()).equals(expression.trim());
 		}
 		return false;
 	}

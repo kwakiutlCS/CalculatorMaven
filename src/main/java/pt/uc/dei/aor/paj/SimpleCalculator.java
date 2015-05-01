@@ -29,14 +29,14 @@ public class SimpleCalculator {
 		case "EqualsSimples": 
 			clone = expression.getClone();
 			if (expression.evaluate()) {
-				history.addExpression(clone, 1);
+				history.addExpression(clone, expression.getExpression(), 1);
 				stats.add(clone.getExpression());
 			}
 			break;
 		case "EqualsCientifico": 
 			clone = expression.getClone();
 			if (expression.evaluateScientific(angleUnitList.getChosenUnit())) {
-				history.addExpression(clone, 2);
+				history.addExpression(clone, expression.getExpression(), 2);
 				stats.add(clone.getExpression());
 			}
 			break;

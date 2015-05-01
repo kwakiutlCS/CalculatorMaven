@@ -81,10 +81,14 @@
 				
 			</div>
 			<div class="historico">
-			<p:scrollPanel styleClass="painel">
+			<p:scrollPanel styleClass="painel" mode="native">
 				<ui:repeat var="item" value="#{history.scientificEntries}"
 					varStatus="status">
-					<p class="#{status.even==true? 'par' : 'impar'}"><h:commandLink value="#{item}" actionListener="#{simpleCalculator.reuseExpression(item.getExpression())}" /></p>
+					<div class="#{status.even==true? 'par' : 'impar'}">
+						<span class="historyExpression"><h:commandLink value="#{item}" actionListener="#{simpleCalculator.reuseExpression(item.getExpression())}" /></span>
+						<span class="historyResult">#{item.result}</span>
+					</div>
+					
 				</ui:repeat>
 			</p:scrollPanel>
 			</div>

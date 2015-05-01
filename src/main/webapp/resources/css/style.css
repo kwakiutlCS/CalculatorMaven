@@ -109,17 +109,32 @@ table.cientifico {
 }
 
 .par {
-	background: #ff8888;
+	background: #E5A9A9;
 	margin: 0;
+	padding: 5px 10px;
 }
 
 .impar {
 	background: #9191ff;
 	margin: 0;
+	padding: 5px 10px;
+}
+
+.historyExpression a{
+	text-decoration: none;
+}
+.historyExpression a:hover {
+	color: white;
+}
+.historyResult {
+	margin-right: 5px;
+	float: right;
+	text-align: center;
+	width: 55px;
 }
 
 .painel{
-	width:250px;
+	width:350px;
 	height:300px;
 }
 

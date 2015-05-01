@@ -20,8 +20,8 @@ public class History implements Serializable {
 		
 	}
 	
-	public void addExpression(MathExpression exp, int type) {
-		HistoryEntry he = new HistoryEntry(exp);
+	public void addExpression(MathExpression exp, String result, int type) {
+		HistoryEntry he = new HistoryEntry(exp, result);
 		
 		if (type == 1) {
 			simpleEntries.remove(he);

@@ -12,9 +12,15 @@ $(function() {
 
 // overrides button click
 var detectBtnClick = function() {
+	$(".clearBtn").click(function(e) {
+		var n = e.currentTarget.value;
+		clear(n);
+		return false;
+	});
+	
 	var screen = $("#simpleKeyBoard\\:expression");
 	var text = screen.val();
-	if (text.length > 29) return false;
+	if (text.length > 37) return false;
 	
 	$(".num").click(function(e) {
 		var n = e.currentTarget.value;
@@ -44,11 +50,6 @@ var detectBtnClick = function() {
 		return false;
 	});
 	
-	$(".clearBtn").click(function(e) {
-		var n = e.currentTarget.value;
-		clear(n);
-		return false;
-	});
 	
 	$(".symBtn").click(function(e) {
 		addSymOperator();
@@ -419,7 +420,10 @@ var detectPressedKeys = function() {
 		};
 		
 		if (key >= 48 && key <= 57) {
-			$("#simpleKeyBoard\\:key"+(key-48)).click();
+			if (!e.shiftKey)
+				$("#simpleKeyBoard\\:key"+(key-48)).click();
+			else if (key === 56) $("#simpleKeyBoard\\:keyParE").click();
+			else if (key === 57) $("#simpleKeyBoard\\:keyParD").click();
 		}
 		else if (key >= 96 && key <= 105) {
 			$("#simpleKeyBoard\\:key"+(key-96)).click();

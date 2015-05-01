@@ -10,14 +10,14 @@
 	<h:graphicImage url="#{resource['images:calculadora.gif']}" />
 		<h:form class="headerForm">
 		Se pretender mudar de calculadora clique no link a seguir: 
-		<h:commandLink action="index" actionListener="#{simpleCalculator.resetScreen}" value="normal" />
+		<h:commandLink action="index?faces-redirect=true" actionListener="#{simpleCalculator.resetScreen}" value="normal" />
 		ou 
-		<h:commandLink action="cientifica" actionListener="#{simpleCalculator.resetScreen}" value="cientifica" />
+		<h:commandLink action="cientifica?faces-redirect=true" actionListener="#{simpleCalculator.resetScreen}" value="cientifica" />
 		<br></br>
 		</h:form>
 		Pretende conhecer as operações mais utilizadas? Clique neste
 		link: 
-		<h:link outcome="stats.xhtml" value="estatistica" />
+		<h:link outcome="stats.xhtml?faces-redirect=true" value="estatistica" />
 		
 	</ui:composition>
 </h:body>
