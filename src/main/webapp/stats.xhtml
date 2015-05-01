@@ -6,24 +6,29 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
-<h:head>
-	<h:outputStylesheet library="css" name="style.css" />
-
-	<title>Calculator</title>
-</h:head>
 <h:body>
 
     	 <ui:composition template="resources/layouts/comum.xhtml">
+    	 <ui:define name="extraHead">
+    	 	<title>Estatística</title>
+    	 </ui:define>
+    	 
+    	 
     	<ui:define name="conteudo">
     	
     
-	<p:scrollPanel styleClass="painel1">
+	<p:scrollPanel styleClass="painel1" mode="native">
     
-	<ui:repeat var="item" value="#{statistics.descriptions}" varStatus="status">
-		<p class="#{status.even==true? 'par' : 'impar'}">#{item} -
-			#{statistics.getSymbolCount(item)}</p>
+	
+	
+	<ui:repeat var="item" value="#{statistics.stats}" varStatus="status">
+	<div class="#{status.even==true? 'par' : 'impar'} stats">
+		<span class="statsItem">#{item}</span>
+		<span class="statsCount">#{item.counter}</span>
+	</div>
 			
 	</ui:repeat>
+	
 	</p:scrollPanel>
 
 

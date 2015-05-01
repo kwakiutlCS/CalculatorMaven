@@ -12,6 +12,12 @@
 
     	 <ui:composition template="resources/layouts/comum.xhtml">
     	 
+    	 <ui:define name="extraHead">
+    	 	<title>Calculadora Científica</title>
+    	 	<h:outputScript library="js" name="script.js" />
+	
+    	 </ui:define>
+    	 
     	<ui:define name="conteudo">
     	
 		<h:form id="simpleKeyBoard">

@@ -126,7 +126,7 @@ table.cientifico {
 .historyExpression a:hover {
 	color: white;
 }
-.historyResult {
+.historyResult, .statsCount {
 	margin-right: 5px;
 	float: right;
 	text-align: center;
@@ -139,10 +139,10 @@ table.cientifico {
 }
 
 .painel1{
-	width:300px;
-	height:350px;
+	width:350px;
+	height:420px;
 	 margin-left:500px;
-   margin-top:200px;
+   margin-top:140px;
    font:bold 15px arial;
 	
 }
