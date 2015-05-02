@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      >
+      
+      
+    <h:body >
+
+    	 <ui:composition template="resources/layouts/comum.xhtml">
+    	 
+    	 <ui:define name="extraHead">
+    	 	<title>Calculadora Científica</title>
+    	 	<h:outputScript library="js" name="script.js" />
+	
+    	 </ui:define>
+    	 
+    	<ui:define name="conteudo">
+    	
+		<h:form id="simpleKeyBoard">
+			<div id="visor" >
+				<p:inputText id="expression" value="#{mathExpression.expression}" size="40" />
+				<h:inputHidden value="#{mathExpression.reset}" id="phase" />
+			</div>
+
+			
+			<div id="botao">
+				
+				
+				<div class="scienceDataPanel">
+					
+				
+				<h:panelGrid columns="4" styleClass="cientifico">
+					<h:commandButton value="7"  styleClass="num" />
+					<h:commandButton value="8"  styleClass="num"/>
+					<h:commandButton value="9"  styleClass="num"/>
+					<h:commandButton value="AC" styleClass="clearBtn"/>
+					<h:commandButton value="4"  styleClass="num"/>
+					<h:commandButton value="5" styleClass="num"/>
+					<h:commandButton value="6"   styleClass="num" />
+					<h:commandButton value="CE"  styleClass="clearBtn"/>
+					<h:commandButton value="1"  styleClass="num"/>
+					<h:commandButton value="2"  styleClass="num"/>
+					<h:commandButton value="3" styleClass="num"/>
+					<h:commandButton value="&#xb1;" styleClass="symBtn"/>
+					<h:commandButton value="."  styleClass="dotBtn"/>
+					<h:commandButton value="0"  styleClass="num" />
+					<h:commandButton value="add" actionListener="#{experimentalSet.add}" styleClass="input_trig addCoorBtn" />
+					<h:commandButton value="draw" actionListener="#{experimentalSet.complete}" action="graph?faces-redirect=true" styleClass="drawPlotBtn input_trig" />
+					<h:button value="normal" outcome="cientifica?faces-redirect=true" styleClass="input_trig switchBtn" />
+				</h:panelGrid>
+				
+				<h:dataTable value="#{experimentalSet.points}" var="point" styleClass="expTable">
+					<h:column>
+						<f:facet name="x">x</f:facet>
+						#{point.x}
+					</h:column>
+					<h:column>
+						<f:facet name="y">y</f:facet>
+						#{point.yV}
+					</h:column>
+					<h:column>
+						<h:commandLink value="remove" actionListener="#{experimentalSet.remove(point.id)}" />
+						
+					</h:column>
+					
+				</h:dataTable>
+				</div>
+				
+				
+				 
+				
+				
+
+				
+				
+			</div>
+			
+		</h:form>
+		</ui:define>
+
+		</ui:composition>
+	    
+
+    </h:body>
+</html>

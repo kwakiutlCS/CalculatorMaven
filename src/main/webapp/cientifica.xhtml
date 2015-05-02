@@ -5,7 +5,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      >
       
       
     <h:body >
@@ -28,7 +29,8 @@
 
 			
 			<div id="botao">
-				 <div>
+				<div class="scienceNormalPanel">
+					<div>
 					<h:selectOneRadio value="#{angleUnitList.chosenUnit}">
 						<f:selectItems value="#{angleUnitList.units}" var="item"
 	                    itemLabel="#{item}" itemValue="#{item}" />
@@ -56,11 +58,10 @@
 					<h:commandButton value="x&#x2b8;" id="keyExp" styleClass="input_trig binOpBtn" />
 					<h:commandButton value="Exp" id="keyNotCien" styleClass="input_trig CieNotBtn"/>
 					<h:commandButton value="Inv" id="keyInv" styleClass="input_trig invBtn"/>
+					<h:button value="f(x)" id="keyGraph" outcome="cientifica2?faces-redirect=true" styleClass="input_trig" />
 					
 				</h:panelGrid>
 				
-				
-
 				<h:panelGrid columns="5" styleClass="cientifico">
 					<h:commandButton value="7" id="key7" styleClass="num" />
 					<h:commandButton value="8" id="key8" styleClass="num"/>
@@ -85,9 +86,7 @@
 					<h:commandButton value="mod" id="keyMod" styleClass="binOpBtn"/>
 					
 				</h:panelGrid>
-				
-			</div>
-			<div class="historico">
+				<div class="historico indPanel">
 			<p:scrollPanel styleClass="painel" mode="native">
 				<ui:repeat var="item" value="#{history.scientificEntries}"
 					varStatus="status">
@@ -99,6 +98,20 @@
 				</ui:repeat>
 			</p:scrollPanel>
 			</div>
+				</div>
+				
+			
+				
+				
+				
+				 
+				
+				
+
+				
+				
+			</div>
+			
 		</h:form>
 		</ui:define>
 

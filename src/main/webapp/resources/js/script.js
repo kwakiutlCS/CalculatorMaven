@@ -1,3 +1,4 @@
+
 $(function() {
 	detectBtnClick();
 	keyBoardSubmit();
@@ -374,7 +375,7 @@ var isDigit = function(n) {
 }
 
 var isConstant = function(n) {
-	var symbols = ["e", "\u03C0"];
+	var symbols = ["e", "\u03C0", "x"];
 	return symbols.indexOf(n) != -1;
 }
 
@@ -451,4 +452,5 @@ var changeScienceView = function() {
 		return false;
 	});	
 }
+
 

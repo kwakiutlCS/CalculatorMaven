@@ -237,6 +237,35 @@ public class MathHelper {
 	}
 
 
+	public static double[] regression(double[] x, double[] y) {
+		double xAvg = avg(x);
+		double yAvg = avg(y);
+		
+		double[] xy = new double[x.length];
+		for (int i = 0; i < x.length; i++) {
+			xy[i] = x[i]*y[i];
+		}
+		double xyAvg = avg(xy);
+		
+		double[] xx = new double[x.length];
+		for (int i = 0; i < x.length; i++) {
+			xx[i] = x[i]*x[i];
+		}
+		double xxAvg = avg(xx);
+		
+		double m = (xAvg*yAvg-xyAvg)/(xAvg*xAvg-xxAvg);
+		double b = yAvg - m*xAvg;
+				
+		return new double[]{m,b,0};
+	}
+	
+	public static double avg(double[] x) {
+		double total = 0;
+		for (double i : x) {
+			total += i;
+		}
+		return total/x.length;
+	}
 	
 	
 	

@@ -191,3 +191,22 @@ footer {
 .headerForm {
 	display: inline;
 }
+
+.graphContainer {
+	  position: absolute;
+  width: 600px;
+  height: 400px;
+  top: 200px;
+  left: 350px;
+  
+}
+
+.graphContainer .chart-container {
+	background: white;
+}
+
+.expTable {
+	position: absolute;
+	top: 300px;
+	left: 400px;
+}
