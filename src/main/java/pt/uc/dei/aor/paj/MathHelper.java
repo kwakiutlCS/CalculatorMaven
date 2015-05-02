@@ -256,8 +256,24 @@ public class MathHelper {
 		double m = (xAvg*yAvg-xyAvg)/(xAvg*xAvg-xxAvg);
 		double b = yAvg - m*xAvg;
 				
-		return new double[]{m,b,0};
+		// SStotal
+		double ssTotal = 0;
+		for (int i = 0; i < y.length; i++) {
+			ssTotal += (y[i]-yAvg)*(y[i]-yAvg);
+		}
+		
+		// SSres
+		double ssRes = 0;
+		for (int i = 0; i < y.length; i++) {
+			double f = x[i]*m+b;
+			ssRes += (y[i]-f)*(y[i]-f);
+		}
+		
+		double R2 = 1 - ssRes/ssTotal;
+		return new double[]{m,b,R2};
 	}
+	
+	
 	
 	public static double avg(double[] x) {
 		double total = 0;

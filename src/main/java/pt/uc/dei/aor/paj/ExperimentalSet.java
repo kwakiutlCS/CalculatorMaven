@@ -23,10 +23,11 @@ public class ExperimentalSet implements Serializable {
 	private MathExpression exp;
 	@Inject
 	private Data data;
+	private String complete;
 	
 	public ExperimentalSet() {
 		points = new ArrayList<>();
-		
+		setComplete("graph");
 		last = null;
 	}
 
@@ -71,12 +72,13 @@ public class ExperimentalSet implements Serializable {
 		exp.clear();
 	}
 
-	public void complete() {
+	public String complete() {
 		data.clear();
 		for (ExperimentalPoint p : points) {
 			data.add(p.getX(), p.getY());
 		}
 		data.complete();
+		return "graph";
 	}
 	
 	public Data getData() {
@@ -85,5 +87,18 @@ public class ExperimentalSet implements Serializable {
 
 	public void setData(Data data) {
 		this.data = data;
+	}
+
+	public String getComplete() {
+		data.clear();
+		for (ExperimentalPoint p : points) {
+			data.add(p.getX(), p.getY());
+		}
+		data.complete();
+		return complete;
+	}
+
+	public void setComplete(String complete) {
+		this.complete = complete;
 	}
 }

@@ -20,11 +20,35 @@
 
 			<h:form styleClass="graphContainer">
 				<rich:chart>
-					<rich:chartSeries symbol="circle" data="#{data.model}" label="experimental" />
+					<rich:chartSeries symbol="circle" data="#{data.model}"
+						label="experimental" />
 					<rich:chartSeries type="line" data="#{data.reg}" label="regressão" />
+					<rich:chartLegend position="nw" />  
 				</rich:chart>
 			</h:form>
 
+			<table class="regressionParams">
+			<thead>
+				<tr>
+					<th>m</th>
+					<th>b</th>
+					<th>R2</th>
+				</tr>
+			</thead>
+				<tbody>
+					<tr>
+						<td><h:outputText value="#{data.m}">
+				<f:convertNumber maxFractionDigits="2" />
+				</h:outputText></td>
+				<td><h:outputText value="#{data.b}">
+				<f:convertNumber maxFractionDigits="2" />
+				</h:outputText></td>
+				<td><h:outputText value="#{data.r2}">
+				<f:convertNumber maxFractionDigits="3" />
+				</h:outputText></td>
+					</tr>
+				</tbody>
+				</table>
 
 		</ui:define>
 	</ui:composition>

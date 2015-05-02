@@ -19,6 +19,9 @@ public class Data implements Serializable {
 	private String name;
 	private NumberChartDataModel model;
 	private NumberChartDataModel reg;
+	private double m;
+	private double b;
+	private double r2;
 	
 	public Data() {
 		clear();
@@ -38,6 +41,9 @@ public class Data implements Serializable {
 		model = new NumberChartDataModel(ChartType.line);
 		reg = new NumberChartDataModel(ChartType.line);
 		this.name = "graph";
+		m = 0;
+		b = 0;
+		setR2(0);
 	}
 	
 	public NumberChartDataModel getModel() { return model; }
@@ -57,10 +63,37 @@ public class Data implements Serializable {
 		}
 		
 		double[] par = MathHelper.regression(x, y);
+		m = par[0];
+		b = par[1];
+		setR2(par[2]);
 		
 		for (int j = 0; j < x.length; j++) {
-			reg.put(x[j], par[0]*x[j]+par[1]);
+			reg.put(x[j], m*x[j]+b);
 		}
+	}
+
+	public double getM() {
+		return m;
+	}
+
+	public void setM(double m) {
+		this.m = m;
+	}
+
+	public double getB() {
+		return b;
+	}
+
+	public void setB(double b) {
+		this.b = b;
+	}
+
+	public double getR2() {
+		return r2;
+	}
+
+	public void setR2(double r2) {
+		this.r2 = r2;
 	}
 
 }
